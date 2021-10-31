@@ -9,6 +9,7 @@ import frc.lib.gamepads.AndButton;
 import frc.lib.gamepads.XboxController;
 import frc.lib.util.Logger;
 import frc.robot.Robot.RobotState;
+import frc.robot.Telemetry.Log;
 import frc.robot.commands.FeedBalls;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.ResetGyro;
@@ -22,6 +23,7 @@ public class Gamepads {
         public static XboxController operator = new XboxController(1, .06, .05);
         public static boolean driverConfigured = false;
         public static boolean operatorConfigured = false;
+        public static String name = Log._controls;
 
         // Configure all the controllers
         public static void configure() {
@@ -159,5 +161,21 @@ public class Gamepads {
         //Configure the button bindings for the driver control in Test Mode
         public static void operatorTestBindings(){
 
+        }
+
+        public static void printDebug(String msg){
+                Logger.println(msg, name, Logger.low1);
+        }
+        
+        public static void printInfo(String msg){
+                Logger.println(msg, name, Logger.normal2);
+        }
+        
+        public static void printWarning(String msg) {
+                Logger.println(msg, name, Logger.high3);
+        }
+        
+        public static void printError(String msg) {
+                Logger.println(msg, name, Logger.critical4);
         }
 }

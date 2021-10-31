@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.Telemetry.Log;
 
 public class LLAim extends PIDCommand {
 
@@ -67,7 +67,7 @@ public class LLAim extends PIDCommand {
   public void execute() {
     super.execute();
     printDebug("Angle: " + this.m_measurement.getAsDouble());
-    Logger.setLevel(Logger.debug1);
+    Logger.setLevel(Logger.low1);
     dashboard();
   }
 
@@ -96,14 +96,14 @@ public class LLAim extends PIDCommand {
   }
 
   public static void printDebug(String msg){
-    Logger.println(msg, Robot._visionLL, Logger.debug1);
+    Logger.println(msg, Log._visionLL, Logger.low1);
   }
   
   public static void printInfo(String msg){
-    Logger.println(msg, Robot._visionLL, Logger.info2);
+    Logger.println(msg, Log._visionLL, Logger.normal2);
   }
   
   public static void printWarning(String msg) {
-    Logger.println(msg, Robot._visionLL, Logger.warning3);
+    Logger.println(msg, Log._visionLL, Logger.high3);
   }
 }

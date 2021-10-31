@@ -7,7 +7,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.lib.util.Logger;
 import frc.robot.Constants;
-import frc.robot.Robot;
+import frc.robot.Telemetry.Log;
 import frc.robot.commands.TeleopSwerve;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Swerve extends SubsystemBase {
-    public static final String name = Robot._drive;
+    public static final String name = Log._drive;
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public PigeonIMU gyro;
@@ -149,18 +149,18 @@ public class Swerve extends SubsystemBase {
     }
 
     public static void printDebug(String msg){
-        Logger.println(msg, name, Logger.debug1);
+        Logger.println(msg, name, Logger.low1);
       }
       
       public static void printInfo(String msg){
-        Logger.println(msg, name, Logger.info2);
+        Logger.println(msg, name, Logger.normal2);
       }
       
       public static void printWarning(String msg) {
-        Logger.println(msg, name, Logger.warning3);
+        Logger.println(msg, name, Logger.high3);
       }
 
       public static void printError(String msg) {
-        Logger.println(msg, name, Logger.error4);
+        Logger.println(msg, name, Logger.critical4);
       }
 }

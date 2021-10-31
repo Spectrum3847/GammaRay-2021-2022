@@ -15,9 +15,10 @@ import frc.lib.drivers.LimeLightControlModes.LedMode;
 import frc.lib.util.Logger;
 import frc.robot.Robot;
 import frc.robot.Robot.RobotState;
+import frc.robot.Telemetry.Log;
 
 public class VisionLL extends SubsystemBase {
-  public static final String name = Robot._visionLL;
+  public static final String name = Log._visionLL;
 
   public final LimeLight limelight;
   private boolean LEDState = true;
@@ -113,19 +114,19 @@ public void setLimeLightPipeline(int i) {
 }
 
 public static void printDebug(String msg){
-  Logger.println(msg, name, Logger.debug1);
+  Logger.println(msg, name, Logger.low1);
 }
 
 public static void printInfo(String msg){
-  Logger.println(msg, name, Logger.info2);
+  Logger.println(msg, name, Logger.normal2);
 }
 
 public static void printWarning(String msg) {
-  Logger.println(msg, name, Logger.warning3);
+  Logger.println(msg, name, Logger.high3);
 }
 
 public static void printError(String msg) {
-  Logger.println(msg, name, Logger.error4);
+  Logger.println(msg, name, Logger.critical4);
 }
 
 }

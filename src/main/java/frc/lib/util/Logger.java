@@ -2,6 +2,10 @@ package frc.lib.util;
 
 import java.util.ArrayList;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+
 /**
  * Based on Team 1114 code from 2015
  * 
@@ -9,10 +13,10 @@ import java.util.ArrayList;
  */
 public class Logger {
 
-	public static final int debug1 = 1;
-	public static final int info2 = 2;
-	public static final int warning3 = 3;
-	public static final int error4 = 4;
+	public static final int low1 = 1;
+	public static final int normal2 = 2;
+	public static final int high3 = 3;
+	public static final int critical4 = 4;
 	public static final int silent5 = 5; //Nothing is printed
 	
 	private static ArrayList<String> currFlags; 
@@ -21,7 +25,7 @@ public class Logger {
     
     static {
         currFlags = new ArrayList<>();
-        currLevel = 7;
+        currLevel = 1;
         defaultOn = false;
     }
     
@@ -40,15 +44,15 @@ public class Logger {
      * @param level
      */
     public static void println(String msg, String flag, int level) {
+        //Log events to both system.out and Shuffleboard Event Markers
         if(meetsCurrRequirements(flag, level)) {
             System.out.println(level + ": [" + flag + "] " + msg);
+            Shuffleboard.addEventMarker(flag + ":  " + msg, logLevelToEventImportance(level));
         }
-        /*
-         * Disabled until We can figure out where this method lives now
-        if (level >= error5){
-        	writeToDS(msg);
+        //Critical are sent to the Driver station no matter what the logger level is set to
+        if (level == critical4){
+            DriverStation.reportWarning(flag + ":  " + msg, false);
         }
-        */
     }
     
     public static void println(String msg, String flag) {
@@ -197,6 +201,17 @@ public class Logger {
             }
         }
         return false;
+    }
+
+    //Log Level to Shuffleboard Event Importance converter
+    private static EventImportance logLevelToEventImportance(int level){
+        switch(level){
+            case 1: return EventImportance.kLow;
+            case 2: return EventImportance.kNormal;
+            case 3: return EventImportance.kHigh;
+            case 4: return EventImportance.kCritical;
+            default: return EventImportance.kTrivial;
+        }
     }
     
 }

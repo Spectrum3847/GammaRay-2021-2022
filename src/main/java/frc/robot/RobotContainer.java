@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.drivers.EForwardableConnections;
 import frc.lib.util.Logger;
+import frc.robot.Telemetry.Dashboard;
+import frc.robot.Telemetry.Log;
 import frc.robot.commands.auto.ThreeBall;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Indexer;
@@ -68,14 +70,14 @@ public class RobotContainer {
   }
 
   public static void printDebug(String msg){
-    Logger.println(msg, Robot._general, Logger.debug1);
+    Logger.println(msg, Log._general, Logger.low1);
   }
   
   public static void printInfo(String msg){
-    Logger.println(msg, Robot._general, Logger.info2);
+    Logger.println(msg, Log._general, Logger.normal2);
   }
   
   public static void printWarning(String msg) {
-    Logger.println(msg, Robot._general, Logger.warning3);
+    Logger.println(msg, Log._general, Logger.high3);
   }
 }

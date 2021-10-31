@@ -1,9 +1,10 @@
-package frc.robot;
+package frc.robot.Telemetry;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.util.Util;
+import frc.robot.RobotContainer;
 
 /*
  * @author matthew, JAG

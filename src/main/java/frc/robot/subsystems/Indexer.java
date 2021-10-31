@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.robot.Constants;
-import frc.robot.Robot;
+import frc.robot.Telemetry.Log;
 
 public class Indexer extends SubsystemBase {
-  public static final String name = Robot._indexer;
+  public static final String name = Log._indexer;
   public final double feedSpeed = 0.6;
   public final double feedOnPulse = 0.3;
   public final double feedOffPulse = 0.1;
@@ -76,18 +76,18 @@ public class Indexer extends SubsystemBase {
   }
 
   public static void printDebug(String msg){
-    Logger.println(msg, name, Logger.debug1);
+    Logger.println(msg, name, Logger.low1);
   }
   
   public static void printInfo(String msg){
-    Logger.println(msg, name, Logger.info2);
+    Logger.println(msg, name, Logger.normal2);
   }
   
   public static void printWarning(String msg) {
-    Logger.println(msg, name, Logger.warning3);
+    Logger.println(msg, name, Logger.high3);
   }
 
   public static void printError(String msg) {
-    Logger.println(msg, name, Logger.error4);
+    Logger.println(msg, name, Logger.critical4);
   }
 }

@@ -4,13 +4,13 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
+import frc.robot.Telemetry.Log;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,18 +25,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
 
-  // Add Debug flags
-  // You can have a flag for each subsystem, etc
-  public static final String _controls = "CONTROL";
-  public static final String _general = "GENERAL";
-  public static final String _auton = "AUTON";
-  public static final String _drive = "DRIVE";
-  public static final String _indexer = "INDEXER";
-  public static final String _intake = "INTAKE";
-  public static final String _launcher = "LAUNCHER";
-  public static final String _tower = "TOWER";
-  public static final String _climber = "CLIMBER";
-  public static final String _visionLL = "LIMELIGHT";
+
 
   public enum RobotState {
     DISABLED, AUTONOMOUS, TELEOP, TEST
@@ -61,7 +50,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    Gamepads.resetConfig();; //Reset Gamepad Configs
+    Gamepads.resetConfig(); //Reset Gamepad Configs
+    Log.initDebugger(); //Config the Debugger based on FMS state
   }
 
   /**
@@ -103,7 +93,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     printInfo("Start autonomousInit()");
-    initDebugger(); //Config the Debugger based on FMS state
+    Log.initDebugger(); //Config the Debugger based on FMS state
     CommandScheduler.getInstance().cancelAll(); //Disable any currently running commands
     LiveWindow.setEnabled(false);
 		LiveWindow.disableAllTelemetry();
@@ -135,7 +125,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    initDebugger(); //Config the Debugger based on FMS state
+    Log.initDebugger(); //Config the Debugger based on FMS state
     printInfo("End teleopInit()");
   }
 
@@ -158,32 +148,17 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 
-  private static void initDebugger(){
-    if(DriverStation.isFMSAttached()) {
-      Logger.setLevel(Logger.warning3);
-    } else {
-      Logger.setLevel(Logger.info2);
-    }
-    Logger.flagOn(_general); //Set all the flags on, comment out ones you want off
-    Logger.flagOn(_auton);
-    Logger.flagOn(_drive);
-    Logger.flagOn(_indexer);
-    Logger.flagOn(_intake);
-    Logger.flagOn(_launcher);
-    Logger.flagOn(_tower);
-    Logger.flagOn(_climber);
-    Logger.flagOn(_visionLL);
-  }
+
 
   public static void printDebug(String msg) {
-    Logger.println(msg, _general, Logger.debug1);
+    Logger.println(msg, Log._general, Logger.low1);
   }
 
   public static void printInfo(String msg) {
-    Logger.println(msg, _general, Logger.info2);
+    Logger.println(msg, Log._general, Logger.normal2);
   }
 
   public static void printWarning(String msg) {
-    Logger.println(msg, _general, Logger.warning3);
+    Logger.println(msg, Log._general, Logger.high3);
   }
 }

@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.SpectrumSolenoid;
 import frc.lib.util.Logger;
 import frc.robot.Constants;
-import frc.robot.Robot;
+import frc.robot.Telemetry.Log;
 
 public class Intake extends SubsystemBase {
-  public static final String name = Robot._intake;
+  public static final String name = Log._intake;
 
   public final double intakeSpeed = 0.75;
 
@@ -85,18 +85,18 @@ public class Intake extends SubsystemBase {
   }
 
   public static void printDebug(String msg){
-    Logger.println(msg, name, Logger.debug1);
+    Logger.println(msg, name, Logger.low1);
   }
   
   public static void printInfo(String msg){
-    Logger.println(msg, name, Logger.info2);
+    Logger.println(msg, name, Logger.normal2);
   }
   
   public static void printWarning(String msg) {
-    Logger.println(msg, name, Logger.warning3);
+    Logger.println(msg, name, Logger.high3);
   }
 
   public static void printError(String msg) {
-    Logger.println(msg, name, Logger.error4);
+    Logger.println(msg, name, Logger.critical4);
   }
 }
