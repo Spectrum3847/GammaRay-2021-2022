@@ -5,7 +5,7 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.Gamepads;
-import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.Swerve.Swerve;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

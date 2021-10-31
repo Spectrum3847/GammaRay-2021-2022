@@ -5,7 +5,7 @@
 package frc.robot.commands.ballpath;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 public class shooterVel extends CommandBase {
   private double _rpm;
 
@@ -13,14 +13,14 @@ public class shooterVel extends CommandBase {
   public shooterVel(double rpm) {
     // Use addRequirements() here to declare subsystem dependencies.
     _rpm = rpm;
-    addRequirements(RobotContainer.launcher, RobotContainer.tower);
+    addRequirements(Robot.launcher, Robot.tower);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.launcher.setLauncherVelocity(_rpm);
-    RobotContainer.tower.setTowerVelocity(RobotContainer.tower.towerRPM);
+    Robot.launcher.setLauncherVelocity(_rpm);
+    Robot.tower.setTowerVelocity(Robot.tower.towerRPM);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,8 +31,8 @@ public class shooterVel extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.launcher.stop();
-    RobotContainer.tower.stop();
+    Robot.launcher.stop();
+    Robot.tower.stop();
   }
 
   // Returns true when the command should end.

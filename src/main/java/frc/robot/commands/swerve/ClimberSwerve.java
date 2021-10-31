@@ -5,8 +5,8 @@ package frc.robot.commands.swerve;
 
 import frc.robot.Constants;
 import frc.robot.Gamepads;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.Swerve;
+import frc.robot.Robot;
+import frc.robot.subsystems.Swerve.Swerve;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -24,7 +24,7 @@ public class ClimberSwerve extends CommandBase {
      * Driver control
      */
     public ClimberSwerve() {
-        this.s_Swerve = RobotContainer.swerve;
+        this.s_Swerve = Robot.swerve;
         addRequirements(s_Swerve);
         this.fieldRelative = false;
         this.openLoop = false;

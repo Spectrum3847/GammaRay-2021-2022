@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 import frc.robot.Telemetry.Log;
 
 public class LLAim extends PIDCommand {
@@ -30,11 +30,11 @@ public class LLAim extends PIDCommand {
             // The PID gainss
             kP, kI, kD),
         // This should return the measurement
-        RobotContainer.visionLL::getLLDegToTarget,
+        Robot.visionLL::getLLDegToTarget,
         // This should return the goal (can also be a constant)
         0,
         // This uses the output
-        (output) -> RobotContainer.swerve.useOutput(output * -1)); // -1 to turn correct direction
+        (output) -> Robot.swerve.useOutput(output * -1)); // -1 to turn correct direction
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
   }
@@ -48,16 +48,16 @@ public class LLAim extends PIDCommand {
     this.getController().setPID(kP, kI, kD);
     getController().setTolerance(tolerance);
 
-    if(RobotContainer.visionLL.getLimelightHasValidTarget()) {
+    if(Robot.visionLL.getLimelightHasValidTarget()) {
       hasTarget = true;
     } else {
       hasTarget = false;
     }
 
-    /*if(RobotContainer.visionLL.getLLTargetArea() < 0.5) {
-      RobotContainer.visionLL.setLimeLightPipeline(1);
+    /*if(Robot.visionLL.getLLTargetArea() < 0.5) {
+      Robot.visionLL.setLimeLightPipeline(1);
     } else {
-      RobotContainer.visionLL.setLimeLightPipeline(0);
+      Robot.visionLL.setLimeLightPipeline(0);
     } */
     
     super.initialize();
@@ -82,11 +82,11 @@ public class LLAim extends PIDCommand {
     //currently vibrates as long as it has target, doesn't care how far from target we are
     /*if (hasTarget) {
       new ParallelCommandGroup(
-        new RumbleController(RobotContainer.operatorController, 0.5),
-        new RumbleController(RobotContainer.driverController, 0.5)
+        new RumbleController(Robot.operatorController, 0.5),
+        new RumbleController(Robot.driverController, 0.5)
       ).schedule();
     }*/
-    RobotContainer.swerve.useOutput(0);
+    Robot.swerve.useOutput(0);
   }
 
   // Returns true when the command should end.

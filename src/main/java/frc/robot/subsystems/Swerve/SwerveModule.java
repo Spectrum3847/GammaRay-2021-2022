@@ -1,7 +1,7 @@
 //Based on Code from Team364 - BaseFalconSwerve
 //https://github.com/Team364/BaseFalconSwerve/tree/338c0278cb63714a617f1601a6b9648c64ee78d1
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.Swerve;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -10,7 +10,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.lib.math.Conversions;
 import frc.lib.util.CTREModuleState;
 import frc.lib.util.SwerveModuleConstants;
-import frc.robot.CTREConfigs;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;

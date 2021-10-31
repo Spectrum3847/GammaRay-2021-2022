@@ -4,13 +4,25 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
+import frc.robot.Telemetry.Dashboard;
 import frc.robot.Telemetry.Log;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.Tower;
+import frc.robot.subsystems.VisionLL;
+import frc.robot.subsystems.Swerve.Swerve;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -19,13 +31,22 @@ import frc.robot.Telemetry.Log;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  // The robot's subsystems are defined here...
+  public static final Swerve swerve = new Swerve();
+  public static final Intake intake = new Intake();
+  public static final Indexer indexer = new Indexer();
+  public static final Tower tower = new Tower();
+  public static final Launcher launcher = new Launcher();
+  public static final Climber climber = new Climber();
+  public static final VisionLL visionLL = new VisionLL(); 
+  public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+
+  public static PowerDistribution pdp = new PowerDistribution(0, ModuleType.kCTRE);
+
   private Command m_autonomousCommand;
 
   public static SpectrumPreferences prefs = SpectrumPreferences.getInstance();
-  private RobotContainer m_robotContainer;
-
-
-
 
   public enum RobotState {
     DISABLED, AUTONOMOUS, TELEOP, TEST
@@ -49,9 +70,13 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    printInfo("Start robotInit()");
+    Dashboard.intializeDashboard();
     Gamepads.resetConfig(); //Reset Gamepad Configs
     Log.initDebugger(); //Config the Debugger based on FMS state
+    compressor.start();
+    visionLL.forwardLimeLightPorts();
+    printInfo("End robotInit()");
   }
 
   /**
@@ -100,7 +125,7 @@ public class Robot extends TimedRobot {
     setState(RobotState.AUTONOMOUS);
 
     // schedule the autonomous command (example)
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = AutonSetup.getAutonomousCommand();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

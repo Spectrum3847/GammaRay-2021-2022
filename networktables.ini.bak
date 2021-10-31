@@ -1,0 +1,14 @@
+[NetworkTables Storage 3.0]
+string "/Preferences/.type"="RobotPreferences"
+double "/Preferences/Launcher I-Zone"=150
+double "/Preferences/Launcher Setpoint"=1000
+double "/Preferences/Launcher kD"=0
+double "/Preferences/Launcher kF"=0.048
+double "/Preferences/Launcher kI"=0.0005
+double "/Preferences/Launcher kP"=0.0465
+double "/Preferences/Tower I-Zone"=150
+double "/Preferences/Tower Setpoint"=1000
+double "/Preferences/Tower kD"=0
+double "/Preferences/Tower kF"=0.048
+double "/Preferences/Tower kI"=0.0005
+double "/Preferences/Tower kP"=0.0465

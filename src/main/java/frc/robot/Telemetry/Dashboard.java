@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.util.Util;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 
 /*
  * @author matthew, JAG
@@ -32,19 +32,19 @@ public class Dashboard {
 
     //Check each subsystems dashboard values and update them
     private static void updatePutShort() {
-        RobotContainer.swerve.dashboard();
-        RobotContainer.launcher.dashboard();
-        RobotContainer.tower.dashboard();
-        RobotContainer.intake.dashboard();
-        RobotContainer.indexer.dashboard();
-        RobotContainer.climber.dashboard();
+        Robot.swerve.dashboard();
+        Robot.launcher.dashboard();
+        Robot.tower.dashboard();
+        Robot.intake.dashboard();
+        Robot.indexer.dashboard();
+        Robot.climber.dashboard();
         SmartDashboard.putBoolean("Pressure SW",
-                RobotContainer.compressor.getPressureSwitchValue());
+                Robot.compressor.getPressureSwitchValue());
     }
 
     //Things that don't need to be sent out each cycle
     private static void updatePutLong(){
-    	//SmartDashboard.putBoolean("Compressor On?", RobotContainer.pneumatics.compressor.enabled());
+    	//SmartDashboard.putBoolean("Compressor On?", Robot.pneumatics.compressor.enabled());
 		
 		//Can change to show a different message than "Yes" and "No"
         SmartDashboard.putBoolean("Change Battery", Util.changeBattery());

@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.util.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -38,6 +39,12 @@ public class VisionLL extends SubsystemBase {
     limeLightLEDOn();
   }
 
+  public void forwardLimeLightPorts(){
+    //Forward the Limelight Ports
+    PortForwarder.add(5800, "10.85.15.22", 5800);
+    PortForwarder.add(5801, "10.85.15.22", 5801);
+
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

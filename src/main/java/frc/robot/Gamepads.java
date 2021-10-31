@@ -109,48 +109,48 @@ public class Gamepads {
 
                 // Indexer
                 operator.selectButton.whileHeld(new FeedBalls());
-                operator.selectButton.whileHeld(new RunCommand(() -> RobotContainer.intake.setManualOutput(0.3),
-                                RobotContainer.intake));
+                operator.selectButton.whileHeld(new RunCommand(() -> Robot.intake.setManualOutput(0.3),
+                                Robot.intake));
 
                 // Tower
-                operator.startButton.whileHeld(new RunCommand(() -> RobotContainer.tower.setPercentModeOutput(0.5),
-                                RobotContainer.tower));
+                operator.startButton.whileHeld(new RunCommand(() -> Robot.tower.setPercentModeOutput(0.5),
+                                Robot.tower));
 
                 // Don't use
                 new AndButton(operator.rightTriggerButton, operator.aButton).whileHeld(new RunCommand(
-                                () -> RobotContainer.launcher.setLauncherVelocity(3500), RobotContainer.launcher)
-                                .alongWith(new RunCommand(() -> RobotContainer.tower.setTowerVelocity(1700))));
+                                () -> Robot.launcher.setLauncherVelocity(3500), Robot.launcher)
+                                .alongWith(new RunCommand(() -> Robot.tower.setTowerVelocity(1700))));
 
                 // Trench
                 new AndButton(operator.rightTriggerButton, operator.bButton).whileHeld(new RunCommand(
-                                () -> RobotContainer.launcher.setLauncherVelocity(5000), RobotContainer.launcher)
-                                .alongWith(new RunCommand(() -> RobotContainer.tower.setTowerVelocity(1700))));
+                                () -> Robot.launcher.setLauncherVelocity(5000), Robot.launcher)
+                                .alongWith(new RunCommand(() -> Robot.tower.setTowerVelocity(1700))));
 
                 // Intiantion line
                 new AndButton(operator.rightTriggerButton, operator.xButton).whileHeld(new RunCommand(
-                                () -> RobotContainer.launcher.setLauncherVelocity(4500), RobotContainer.launcher)
-                                .alongWith(new RunCommand(() -> RobotContainer.tower.setTowerVelocity(1700))));
+                                () -> Robot.launcher.setLauncherVelocity(4500), Robot.launcher)
+                                .alongWith(new RunCommand(() -> Robot.tower.setTowerVelocity(1700))));
 
                 // Hood
                 operator.Dpad.Up.whenPressed(
-                                new RunCommand(() -> RobotContainer.launcher.setHood(1.0), RobotContainer.launcher));
+                                new RunCommand(() -> Robot.launcher.setHood(1.0), Robot.launcher));
                 operator.Dpad.Down.whenPressed(
-                                new RunCommand(() -> RobotContainer.launcher.setHood(0), RobotContainer.launcher));
+                                new RunCommand(() -> Robot.launcher.setHood(0), Robot.launcher));
                 operator.Dpad.Left.whenPressed(
-                                new RunCommand(() -> RobotContainer.launcher.setHood(0.33), RobotContainer.launcher));
+                                new RunCommand(() -> Robot.launcher.setHood(0.33), Robot.launcher));
                 operator.Dpad.Right.whenPressed(
-                                new RunCommand(() -> RobotContainer.launcher.setHood(0.66), RobotContainer.launcher));
+                                new RunCommand(() -> Robot.launcher.setHood(0.66), Robot.launcher));
 
                 // Unjam all the things
-                operator.leftBumper.whileHeld(new RunCommand(() -> RobotContainer.intake.setManualOutput(-0.5))
-                                .alongWith(new RunCommand(() -> RobotContainer.indexer.setManualOutput(-RobotContainer.indexer.feedSpeed),RobotContainer.indexer)
-                                .alongWith(new RunCommand(() -> RobotContainer.tower.setPercentModeOutput(-0.3),RobotContainer.tower)
-                                .alongWith(new RunCommand(() -> RobotContainer.launcher.setPercentModeOutput(-0.5),RobotContainer.launcher)
-                                .alongWith(new StartEndCommand(() -> RobotContainer.intake.down(),() -> RobotContainer.intake.up())))))
+                operator.leftBumper.whileHeld(new RunCommand(() -> Robot.intake.setManualOutput(-0.5))
+                                .alongWith(new RunCommand(() -> Robot.indexer.setManualOutput(-Robot.indexer.feedSpeed),Robot.indexer)
+                                .alongWith(new RunCommand(() -> Robot.tower.setPercentModeOutput(-0.3),Robot.tower)
+                                .alongWith(new RunCommand(() -> Robot.launcher.setPercentModeOutput(-0.5),Robot.launcher)
+                                .alongWith(new StartEndCommand(() -> Robot.intake.down(),() -> Robot.intake.up())))))
                                 );
 
-                operator.yButton.whileHeld(new RunCommand(() -> RobotContainer.climber.setManualOutput(-1),
-                                RobotContainer.climber));
+                operator.yButton.whileHeld(new RunCommand(() -> Robot.climber.setManualOutput(-1),
+                                Robot.climber));
         }
 
         //Configure the button bindings for the driver control in Test Mode

@@ -10,7 +10,7 @@ package frc.robot.commands.swerve;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 
 public class TurnToAngle extends ProfiledPIDCommand {
 
@@ -29,15 +29,15 @@ public class TurnToAngle extends ProfiledPIDCommand {
             // The motion profile constraints
             new TrapezoidProfile.Constraints(360, 360)),
         // This should return the measurement
-        RobotContainer.swerve::getDegrees,
+        Robot.swerve::getDegrees,
         // This should return the goal (can also be a constant)
         angle,
         // This uses the output
-        (output, setpoint) -> RobotContainer.swerve.useOutput(output));
+        (output, setpoint) -> Robot.swerve.useOutput(output));
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(0.2);
-    double differance = angle - RobotContainer.swerve.getDegrees();
+    double differance = angle - Robot.swerve.getDegrees();
     if (differance > 180) {
       differance = (360 - differance) * -1;
     }
@@ -57,7 +57,7 @@ public class TurnToAngle extends ProfiledPIDCommand {
   @Override
   public void end(boolean interrupted) {
     super.end(interrupted);
-    RobotContainer.swerve.useOutput(0);
+    Robot.swerve.useOutput(0);
   }
 
   // Returns true when the command should end.

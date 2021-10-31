@@ -4,8 +4,8 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.Swerve;
+import frc.robot.Robot;
+import frc.robot.subsystems.Swerve.Swerve;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -25,7 +25,7 @@ public class SwerveDrive extends CommandBase {
      * Driver control
      */
     public SwerveDrive(boolean fieldRelative, double y, double x) {
-        this.s_Swerve = RobotContainer.swerve;
+        this.s_Swerve = Robot.swerve;
         addRequirements(s_Swerve);
         this.fieldRelative = fieldRelative;
         this.openLoop = false;
