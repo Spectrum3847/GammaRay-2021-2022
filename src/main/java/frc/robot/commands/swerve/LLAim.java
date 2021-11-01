@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
 import frc.robot.Robot;
-import frc.robot.Telemetry.Log;
+import frc.robot.telemetry.Log;
 
 public class LLAim extends PIDCommand {
 

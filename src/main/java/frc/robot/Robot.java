@@ -14,8 +14,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
-import frc.robot.Telemetry.Dashboard;
-import frc.robot.Telemetry.Log;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -23,6 +21,9 @@ import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.VisionLL;
 import frc.robot.subsystems.Swerve.Swerve;
+import frc.robot.telemetry.Dashboard;
+import frc.robot.telemetry.Log;
+import frc.robot.telemetry.Shuffler;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,7 +33,8 @@ import frc.robot.subsystems.Swerve.Swerve;
  */
 public class Robot extends TimedRobot {
 
-  // The robot's subsystems are defined here...
+  //subsystems and hardware are defined here
+  public static final Shuffler shuffler = new Shuffler();
   public static final Swerve swerve = new Swerve();
   public static final Intake intake = new Intake();
   public static final Indexer indexer = new Indexer();
@@ -41,13 +43,15 @@ public class Robot extends TimedRobot {
   public static final Climber climber = new Climber();
   public static final VisionLL visionLL = new VisionLL(); 
   public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-
   public static PowerDistribution pdp = new PowerDistribution(0, ModuleType.kCTRE);
-
-  private Command m_autonomousCommand;
-
   public static SpectrumPreferences prefs = SpectrumPreferences.getInstance();
 
+  //AutonCommand
+  private Command m_autonomousCommand;
+
+  /**
+   * Robot State Tracking Setup
+   */
   public enum RobotState {
     DISABLED, AUTONOMOUS, TELEOP, TEST
   }
@@ -68,15 +72,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-    printInfo("Start robotInit()");
+    printNormal("Start robotInit()");
     Dashboard.intializeDashboard();
+    shuffler.initialize();
     Gamepads.resetConfig(); //Reset Gamepad Configs
     Log.initDebugger(); //Config the Debugger based on FMS state
     compressor.start();
     visionLL.forwardLimeLightPorts();
-    printInfo("End robotInit()");
+    printNormal("End robotInit()");
   }
 
   /**
@@ -96,18 +99,18 @@ public class Robot extends TimedRobot {
   
     //Ensure the controllers are always configured
     Gamepads.configure();
+    shuffler.update();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
     setState(RobotState.DISABLED);
-    printInfo("Start disabledInit()");
+    printNormal("Start disabledInit()");
+    Log.initDebugger(); //Config the Debugger based on FMS state
     Gamepads.resetConfig();; //Reset Gamepad Configs
     CommandScheduler.getInstance().cancelAll(); //Disable any currently running commands
-    LiveWindow.setEnabled(false);
-    LiveWindow.disableAllTelemetry();
-    printInfo("End disabledInit()");
+    printNormal("End disabledInit()");
   }
 
   @Override
@@ -117,12 +120,12 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    printInfo("Start autonomousInit()");
+    setState(RobotState.AUTONOMOUS);
+    printNormal("Start autonomousInit()");
     Log.initDebugger(); //Config the Debugger based on FMS state
     CommandScheduler.getInstance().cancelAll(); //Disable any currently running commands
-    LiveWindow.setEnabled(false);
+    LiveWindow.setEnabled(false);     //Disable Live Window we don't need that data being sent
 		LiveWindow.disableAllTelemetry();
-    setState(RobotState.AUTONOMOUS);
 
     // schedule the autonomous command (example)
     m_autonomousCommand = AutonSetup.getAutonomousCommand();
@@ -130,7 +133,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
 
-    printInfo("End autonomousInit()");
+    printNormal("End autonomousInit()");
   }
 
   /** This function is called periodically during autonomous. */
@@ -140,18 +143,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     setState(RobotState.TELEOP);
-    printInfo("Start teleopInit()");
-    Gamepads.resetConfig();; //Reset Gamepad Configs
+    printNormal("Start teleopInit()");
     CommandScheduler.getInstance().cancelAll(); //Disable any currently running commands
-		LiveWindow.setEnabled(false);
-		LiveWindow.disableAllTelemetry();
-
-    //Backup code to make sure the autonmous command is actually cancelled
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
     Log.initDebugger(); //Config the Debugger based on FMS state
-    printInfo("End teleopInit()");
+    Gamepads.resetConfig();; //Reset Gamepad Configs
+		LiveWindow.setEnabled(false);     //Disable Live Window we don't need that data being sent
+		LiveWindow.disableAllTelemetry();
+    printNormal("End teleopInit()");
   }
 
   /** This function is called periodically during operator control. */
@@ -165,8 +163,7 @@ public class Robot extends TimedRobot {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
     Gamepads.resetConfig();; //Reset Gamepad Configs
-
-
+    Log.initDebugger(); //Config the Debugger based on FMS state
   }
 
   /** This function is called periodically during test mode. */
@@ -174,16 +171,18 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {}
 
 
-
-  public static void printDebug(String msg) {
+  //---------------//
+  // Print Methods //
+  //---------------//
+  public static void printLow(String msg) {
     Logger.println(msg, Log._general, Logger.low1);
   }
 
-  public static void printInfo(String msg) {
+  public static void printNormal(String msg) {
     Logger.println(msg, Log._general, Logger.normal2);
   }
 
-  public static void printWarning(String msg) {
+  public static void printHigh(String msg) {
     Logger.println(msg, Log._general, Logger.high3);
   }
 }

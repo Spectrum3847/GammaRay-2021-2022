@@ -7,8 +7,8 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.lib.util.Logger;
 import frc.robot.Constants;
-import frc.robot.Telemetry.Log;
 import frc.robot.commands.TeleopSwerve;
+import frc.robot.telemetry.Log;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;

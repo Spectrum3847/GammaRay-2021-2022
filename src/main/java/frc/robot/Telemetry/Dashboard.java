@@ -1,4 +1,4 @@
-package frc.robot.Telemetry;
+package frc.robot.telemetry;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;

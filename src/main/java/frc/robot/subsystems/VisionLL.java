@@ -16,7 +16,7 @@ import frc.lib.drivers.LimeLightControlModes.LedMode;
 import frc.lib.util.Logger;
 import frc.robot.Robot;
 import frc.robot.Robot.RobotState;
-import frc.robot.Telemetry.Log;
+import frc.robot.telemetry.Log;
 
 public class VisionLL extends SubsystemBase {
   public static final String name = Log._visionLL;

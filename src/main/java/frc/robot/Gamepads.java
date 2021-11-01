@@ -9,13 +9,13 @@ import frc.lib.gamepads.AndButton;
 import frc.lib.gamepads.XboxController;
 import frc.lib.util.Logger;
 import frc.robot.Robot.RobotState;
-import frc.robot.Telemetry.Log;
 import frc.robot.commands.FeedBalls;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.ResetGyro;
 import frc.robot.commands.swerve.ClimberSwerve;
 import frc.robot.commands.swerve.LLAim;
 import frc.robot.commands.swerve.TurnToAngle;
+import frc.robot.telemetry.Log;
 
 public class Gamepads {
         // Create Joysticks first so they can be used in defaultCommands

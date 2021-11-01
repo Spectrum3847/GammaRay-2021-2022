@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
 import frc.robot.Constants;
-import frc.robot.Telemetry.Log;
+import frc.robot.telemetry.Log;
 
 public class Launcher extends SubsystemBase {
   public static final String name = Log._launcher;

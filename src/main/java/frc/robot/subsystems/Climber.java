@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.robot.Constants;
 import frc.robot.Gamepads;
-import frc.robot.Telemetry.Log;
+import frc.robot.telemetry.Log;
 
 public class Climber extends SubsystemBase {
   public static final String name = Log._climber;

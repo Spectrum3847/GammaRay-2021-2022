@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -15,10 +16,11 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.SpectrumSolenoid;
 import frc.lib.util.Logger;
+import frc.lib.util.TalonFXSetup;
 import frc.robot.Constants;
-import frc.robot.Telemetry.Log;
+import frc.robot.telemetry.Log;
 
-public class Intake extends SubsystemBase {
+public class Intake extends SubsystemBase{
   public static final String name = Log._intake;
 
   public final double intakeSpeed = 0.75;
@@ -30,24 +32,8 @@ public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   public Intake() {  
     setName(name);
-
     motor = new WPI_TalonFX(Constants.IntakeConstants.kIntakeMotor);
-    motor.setInverted(false);
-    SupplyCurrentLimitConfiguration supplyCurrentLimit = new SupplyCurrentLimitConfiguration(true, 40, 45, 0.5);
-    motor.configSupplyCurrentLimit(supplyCurrentLimit);
-    motor.setNeutralMode(NeutralMode.Coast);
-
-    int time = 255;
-    //motor.setStatusFramePeriod(StatusFrame.Status_1_General, 100);
-    motor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_6_Misc, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_7_CommStatus, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_9_MotProfBuffer, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_10_MotionMagic, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, time);
-    motor.setStatusFramePeriod(StatusFrame.Status_17_Targets1, time);
+    TalonFXSetup.defaultSetup(motor);
     
     solDown = new SpectrumSolenoid(Constants.IntakeConstants.kIntakeDown);
 

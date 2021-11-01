@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.robot.Constants;
-import frc.robot.Telemetry.Log;
+import frc.robot.telemetry.Log;
 
 public class Indexer extends SubsystemBase {
   public static final String name = Log._indexer;
