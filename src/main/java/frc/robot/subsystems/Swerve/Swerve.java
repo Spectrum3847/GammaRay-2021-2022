@@ -8,6 +8,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
 import frc.robot.Constants;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.telemetry.Log;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -42,17 +43,17 @@ public class Swerve extends SubsystemBase {
 
     public Swerve() {
         setName(name);
-        gyro = new PigeonIMU(Constants.Swerve.pigeonID);
+        gyro = new PigeonIMU(Constants.SwerveConstants.pigeonID);
         gyro.configFactoryDefault();
         zeroGyro();
         
-        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw());
+        swerveOdometry = new SwerveDriveOdometry(Constants.SwerveConstants.swerveKinematics, getYaw());
 
         mSwerveMods = new SwerveModule[] {
-            new SwerveModule(0, Constants.Swerve.Mod0.constants),
-            new SwerveModule(1, Constants.Swerve.Mod1.constants),
-            new SwerveModule(2, Constants.Swerve.Mod2.constants),
-            new SwerveModule(3, Constants.Swerve.Mod3.constants)
+            new SwerveModule(0, Constants.SwerveConstants.Mod0.constants),
+            new SwerveModule(1, Constants.SwerveConstants.Mod1.constants),
+            new SwerveModule(2, Constants.SwerveConstants.Mod2.constants),
+            new SwerveModule(3, Constants.SwerveConstants.Mod3.constants)
         };
 
         //Setup thetaController used for auton and automatic turns
@@ -66,12 +67,12 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getYaw(), getStates());   
 
         //------ Update PD values -------//
-        double xkP = SpectrumPreferences.getInstance().getNumber("Swerve: X kP", Constants.AutoConstants.kPXController)/100;
-        double xkD = SpectrumPreferences.getInstance().getNumber("Swerve: X kD", 0.0)/100;
-        double ykP = SpectrumPreferences.getInstance().getNumber("Swerve: Y kP", Constants.AutoConstants.kPYController)/100;
-        double ykD = SpectrumPreferences.getInstance().getNumber("Swerve: Y kD", 0.0)/100;
-        double thetakP = SpectrumPreferences.getInstance().getNumber("Swerve: Theta kP", Constants.AutoConstants.kPThetaController)/100;
-        double thetakD = SpectrumPreferences.getInstance().getNumber("Swerve: Theta kD", 0.0)/100;        
+        double xkP = SpectrumPreferences.getInstance().getNumber("Swerve: X kP", AutoConstants.kPXController)/100;
+        double xkD = SpectrumPreferences.getInstance().getNumber("Swerve: X kD", AutoConstants.kDXController)/100;
+        double ykP = SpectrumPreferences.getInstance().getNumber("Swerve: Y kP", AutoConstants.kPYController)/100;
+        double ykD = SpectrumPreferences.getInstance().getNumber("Swerve: Y kD", AutoConstants.kDYController)/100;
+        double thetakP = SpectrumPreferences.getInstance().getNumber("Swerve: Theta kP", AutoConstants.kPThetaController)/100;
+        double thetakD = SpectrumPreferences.getInstance().getNumber("Swerve: Theta kD", AutoConstants.kDThetaController)/100;        
         xController.setPID(xkP, 0, xkD);
         yController.setPID(ykP, 0, ykD);
         thetaController.setPID(thetakP, 0, thetakD);
@@ -89,7 +90,7 @@ public class Swerve extends SubsystemBase {
             rotation = 0;
         }
         SwerveModuleState[] swerveModuleStates =
-            Constants.Swerve.swerveKinematics.toSwerveModuleStates(
+            Constants.SwerveConstants.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
@@ -101,7 +102,7 @@ public class Swerve extends SubsystemBase {
                                     translation.getY(), 
                                     rotation)
                                 );
-        SwerveDriveKinematics.normalizeWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+        SwerveDriveKinematics.normalizeWheelSpeeds(swerveModuleStates, Constants.SwerveConstants.maxSpeed);
 
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
@@ -112,7 +113,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public void useOutput(double output) {
-        pidTurn = output * Constants.Swerve.maxAngularVelocity;
+        pidTurn = output * Constants.SwerveConstants.maxAngularVelocity;
     }
 
     //Used for control loops that give a rotational velocity directly
@@ -122,7 +123,7 @@ public class Swerve extends SubsystemBase {
 
     /* Used by SwerveControllerCommand in Auto */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.normalizeWheelSpeeds(desiredStates, Constants.Swerve.maxSpeed);
+        SwerveDriveKinematics.normalizeWheelSpeeds(desiredStates, Constants.SwerveConstants.maxSpeed);
         
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(desiredStates[mod.moduleNumber], false);
@@ -157,7 +158,7 @@ public class Swerve extends SubsystemBase {
     public Rotation2d getYaw() {
         double[] ypr = new double[3];
         gyro.getYawPitchRoll(ypr);
-        return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
+        return (Constants.SwerveConstants.invertGyro) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
     }
 
     public double getDegrees() {

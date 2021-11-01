@@ -3,7 +3,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
+import frc.robot.Constants.SwerveConstants;
 import frc.robot.Gamepads;
 import frc.robot.subsystems.Swerve.Swerve;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -36,8 +36,8 @@ public class TeleopSwerve extends CommandBase {
         double rAxis = Gamepads.driver.triggers.getTwist() * -0.75;
 
         
-        translation = new Translation2d(yAxis, xAxis).times(Constants.Swerve.maxSpeed);
-        rotation = rAxis * Constants.Swerve.maxAngularVelocity;
+        translation = new Translation2d(yAxis, xAxis).times(SwerveConstants.maxSpeed);
+        rotation = rAxis * SwerveConstants.maxAngularVelocity;
         s_Swerve.drive(translation, rotation, fieldRelative, openLoop);
     }
 }

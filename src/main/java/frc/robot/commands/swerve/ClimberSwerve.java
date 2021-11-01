@@ -37,8 +37,8 @@ public class ClimberSwerve extends CommandBase {
         double rAxis = Gamepads.driver.triggers.getTwist() * -1;
 
         
-        translation = new Translation2d(yAxis, xAxis).times(Constants.Swerve.maxSpeed);
-        rotation = rAxis * Constants.Swerve.maxAngularVelocity;
+        translation = new Translation2d(yAxis, xAxis).times(Constants.SwerveConstants.maxSpeed);
+        rotation = rAxis * Constants.SwerveConstants.maxAngularVelocity;
         s_Swerve.drive(translation, rotation, fieldRelative, openLoop);
     }
 }

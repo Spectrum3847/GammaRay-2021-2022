@@ -13,7 +13,8 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants;
+import frc.robot.Constants.SwerveConstants;
+import frc.robot.Constants.AutoConstants;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -23,9 +24,9 @@ public class TestPathFollowing extends SequentialCommandGroup {
   public TestPathFollowing() {
     TrajectoryConfig config =
     new TrajectoryConfig(
-            Constants.AutoConstants.kMaxSpeedMetersPerSecond,
-            Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-        .setKinematics(Constants.Swerve.swerveKinematics);
+            AutoConstants.kMaxSpeedMetersPerSecond,
+            AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+        .setKinematics(SwerveConstants.swerveKinematics);
 
 // An example trajectory to follow.  All units in meters.
 Trajectory exampleTrajectory =

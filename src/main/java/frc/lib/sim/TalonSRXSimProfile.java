@@ -15,7 +15,7 @@ class TalonSRXSimProfile extends SimProfile {
     private final boolean _sensorPhase;
 
     /** The current position */
-    private double _pos = 0;
+    //private double _pos = 0;
     /** The current velocity */
     private double _vel = 0;
 
@@ -67,7 +67,7 @@ class TalonSRXSimProfile extends SimProfile {
         else {
             _vel += 0.9 * (theoreticalVel - _vel);
         }
-        _pos += _vel * period / 100;
+        //_pos += _vel * period / 100;
 
         /// SET SIM PHYSICS INPUTS
 

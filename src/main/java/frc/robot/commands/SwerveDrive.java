@@ -3,7 +3,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
+import frc.robot.Constants.SwerveConstants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Swerve.Swerve;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -39,8 +39,8 @@ public class SwerveDrive extends CommandBase {
         double xAxis = m_x;
         double rAxis = 0;
 
-        translation = new Translation2d(yAxis, xAxis).times(Constants.Swerve.maxSpeed);
-        rotation = rAxis * Constants.Swerve.maxAngularVelocity;
+        translation = new Translation2d(yAxis, xAxis).times(SwerveConstants.maxSpeed);
+        rotation = rAxis * SwerveConstants.maxAngularVelocity;
         s_Swerve.drive(translation, rotation, fieldRelative, openLoop);
     }
 }

@@ -26,7 +26,7 @@ public final class Constants {
     public static int CANconfigTimeOut = 0;
     public static final int minBatteryVoltage = 12;
 
-    public static final class Swerve {
+    public static final class SwerveConstants {
         public static final int pigeonID = 0;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
