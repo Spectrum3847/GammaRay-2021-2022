@@ -111,6 +111,8 @@ public class Robot extends TimedRobot {
     Log.initDebugger(); //Config the Debugger based on FMS state
     Gamepads.resetConfig();; //Reset Gamepad Configs
     CommandScheduler.getInstance().cancelAll(); //Disable any currently running commands
+    LiveWindow.setEnabled(false);     //Disable Live Window we don't need that data being sent
+		LiveWindow.disableAllTelemetry();
     printNormal("End disabledInit()");
   }
 

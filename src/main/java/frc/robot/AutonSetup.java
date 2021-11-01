@@ -1,7 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.auto.ThreeBall;
+import frc.robot.commands.auto.TestPathFollowing;
 
 public class AutonSetup {
 
@@ -12,6 +12,6 @@ public class AutonSetup {
    */
   public static Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new ThreeBall();
+    return new TestPathFollowing();
   }
 }
