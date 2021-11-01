@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
+import frc.lib.sim.PhysicsSim;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -170,6 +171,13 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 
+  public void simulationInit() {
+		Sim.intialization();
+	}
+	
+	public void simulationPeriodic() {
+		PhysicsSim.getInstance().run();
+	}
 
   //---------------//
   // Print Methods //

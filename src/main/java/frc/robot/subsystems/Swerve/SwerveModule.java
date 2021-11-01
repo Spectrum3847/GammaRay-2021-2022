@@ -20,8 +20,8 @@ import com.ctre.phoenix.sensors.WPI_CANCoder;
 public class SwerveModule {
     public int moduleNumber;
     private double angleOffset;
-    private WPI_TalonFX mAngleMotor;
-    private WPI_TalonFX mDriveMotor;
+    public WPI_TalonFX mAngleMotor;
+    public WPI_TalonFX mDriveMotor;
     private WPI_CANCoder angleEncoder;
     private double lastAngle;
 

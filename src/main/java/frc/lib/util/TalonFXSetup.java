@@ -24,7 +24,7 @@ public class TalonFXSetup {
     public static void defaultStatusFrames(TalonFX motor){
         int time = 255;
         //motor.setStatusFramePeriod(StatusFrame.Status_1_General, 100);
-        motor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, time);
+        //motor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, time);
         motor.setStatusFramePeriod(StatusFrame.Status_6_Misc, time);
         motor.setStatusFramePeriod(StatusFrame.Status_7_CommStatus, time);
         motor.setStatusFramePeriod(StatusFrame.Status_9_MotProfBuffer, time);

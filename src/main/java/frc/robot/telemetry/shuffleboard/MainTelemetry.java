@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import java.util.Map;
 
 import frc.robot.Gamepads;
+import frc.robot.Robot;
 import frc.robot.telemetry.Log;
 import frc.lib.util.Logger;
 
@@ -58,7 +59,8 @@ public class MainTelemetry {
     public void initializeViewable() {
         matchTimeWidget().withPosition(0, 1);
         flashWidget().withPosition(0, 0);
-        m_tab.addNumber("gamepad y", () -> Gamepads.driver.leftStick.getY());
+        WidgetsAndLayouts.TalonFXLayout("Climber Motor", m_tab, Robot.climber.motor).withPosition(1, 0);
+        m_tab.addNumber("gamepad y", () -> Gamepads.driver.leftStick.getY()).withPosition(0, 4);
     }
 
     // Match Time
