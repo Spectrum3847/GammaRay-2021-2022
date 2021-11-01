@@ -9,7 +9,7 @@ import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
 import frc.robot.Constants;
 import frc.robot.Constants.AutoConstants;
-import frc.robot.commands.TeleopSwerve;
+import frc.robot.commands.swerve.TeleopSwerve;
 import frc.robot.telemetry.Log;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;

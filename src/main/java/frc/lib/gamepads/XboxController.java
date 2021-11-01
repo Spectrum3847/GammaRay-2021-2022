@@ -14,6 +14,12 @@ public class XboxController extends Joystick {
 		this(port);
 		this.leftStick.setDeadband(xDeadband, yDeadband);
 		this.rightStick.setDeadband(xDeadband, yDeadband);
+	}	
+
+	public XboxController(int port, double leftXDeadband, double leftYDeadband, double rightXDeadband, double rightYDeadband) {
+		this(port);
+		this.leftStick.setDeadband(leftXDeadband, leftYDeadband);
+		this.rightStick.setDeadband(rightXDeadband, rightYDeadband);
 	}
 
 	public Button xButton = new Button(this, XboxButton.X);
