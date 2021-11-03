@@ -7,7 +7,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
-import frc.robot.Constants;
+import frc.robot.Constants.SwerveConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.commands.swerve.TeleopSwerve;
 import frc.robot.telemetry.Log;
@@ -35,25 +35,25 @@ public class Swerve extends SubsystemBase {
     public double drive_y = 0;
     public double drive_rotation = 0;
     private final Field2d m_field = new Field2d();
-    public ProfiledPIDController thetaController = new ProfiledPIDController(Constants.AutoConstants.kPThetaController, 0, 0,
-                                                            Constants.AutoConstants.kThetaControllerConstraints);;
-    public PIDController xController = new PIDController(Constants.AutoConstants.kPXController, 0, 0);
-    public PIDController yController = new PIDController(Constants.AutoConstants.kPYController, 0, 0);
+    public ProfiledPIDController thetaController = new ProfiledPIDController(AutoConstants.kPThetaController, 0, 0,
+                                                            AutoConstants.kThetaControllerConstraints);;
+    public PIDController xController = new PIDController(AutoConstants.kPXController, 0, 0);
+    public PIDController yController = new PIDController(AutoConstants.kPYController, 0, 0);
 
 
     public Swerve() {
         setName(name);
-        gyro = new PigeonIMU(Constants.SwerveConstants.pigeonID);
+        gyro = new PigeonIMU(SwerveConstants.pigeonID);
         gyro.configFactoryDefault();
         zeroGyro();
         
-        swerveOdometry = new SwerveDriveOdometry(Constants.SwerveConstants.swerveKinematics, getYaw());
+        swerveOdometry = new SwerveDriveOdometry(SwerveConstants.swerveKinematics, getYaw());
 
         mSwerveMods = new SwerveModule[] {
-            new SwerveModule(0, Constants.SwerveConstants.Mod0.constants),
-            new SwerveModule(1, Constants.SwerveConstants.Mod1.constants),
-            new SwerveModule(2, Constants.SwerveConstants.Mod2.constants),
-            new SwerveModule(3, Constants.SwerveConstants.Mod3.constants)
+            new SwerveModule(0, SwerveConstants.Mod0.constants),
+            new SwerveModule(1, SwerveConstants.Mod1.constants),
+            new SwerveModule(2, SwerveConstants.Mod2.constants),
+            new SwerveModule(3, SwerveConstants.Mod3.constants)
         };
 
         //Setup thetaController used for auton and automatic turns
@@ -90,7 +90,7 @@ public class Swerve extends SubsystemBase {
             rotation = 0;
         }
         SwerveModuleState[] swerveModuleStates =
-            Constants.SwerveConstants.swerveKinematics.toSwerveModuleStates(
+            SwerveConstants.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
@@ -102,7 +102,7 @@ public class Swerve extends SubsystemBase {
                                     translation.getY(), 
                                     rotation)
                                 );
-        SwerveDriveKinematics.normalizeWheelSpeeds(swerveModuleStates, Constants.SwerveConstants.maxSpeed);
+        SwerveDriveKinematics.normalizeWheelSpeeds(swerveModuleStates, SwerveConstants.maxSpeed);
 
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
@@ -113,7 +113,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public void useOutput(double output) {
-        pidTurn = output * Constants.SwerveConstants.maxAngularVelocity;
+        pidTurn = output * SwerveConstants.maxAngularVelocity;
     }
 
     //Used for control loops that give a rotational velocity directly
@@ -123,7 +123,7 @@ public class Swerve extends SubsystemBase {
 
     /* Used by SwerveControllerCommand in Auto */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.normalizeWheelSpeeds(desiredStates, Constants.SwerveConstants.maxSpeed);
+        SwerveDriveKinematics.normalizeWheelSpeeds(desiredStates, SwerveConstants.maxSpeed);
         
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(desiredStates[mod.moduleNumber], false);
@@ -158,7 +158,7 @@ public class Swerve extends SubsystemBase {
     public Rotation2d getYaw() {
         double[] ypr = new double[3];
         gyro.getYawPitchRoll(ypr);
-        return (Constants.SwerveConstants.invertGyro) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
+        return (SwerveConstants.invertGyro) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
     }
 
     public double getDegrees() {
@@ -170,22 +170,11 @@ public class Swerve extends SubsystemBase {
     }
 
     public void dashboard(){
-        for(SwerveModule mod : mSwerveMods){
-            SmartDashboard.putNumber("Swerve/Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
-            SmartDashboard.putNumber("Swerve/Mod " + mod.moduleNumber + " Integrated", mod.getState().angle.getDegrees());
-            SmartDashboard.putNumber("Swerve/Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
-        }
-        SmartDashboard.putNumber("Swerve/Gyro Yaw", getYaw().getDegrees());
-        SmartDashboard.putNumber("Swerve/Drive vY", drive_y);
-        SmartDashboard.putNumber("Swerve/Drive vX", drive_x);
-        SmartDashboard.putNumber("Swerve/Drive vRotation", drive_rotation);
-
         SmartDashboard.putNumber("Swerve/Drive pY", this.getPose().getY());
         SmartDashboard.putNumber("Swerve/Drive pX", this.getPose().getX());
 
         SmartDashboard.putData("Field", m_field);
     }
-
 
     public static void printDebug(String msg){
         Logger.println(msg, name, Logger.low1);

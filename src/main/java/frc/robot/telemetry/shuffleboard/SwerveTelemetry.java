@@ -6,8 +6,10 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 
 import java.util.Map;
 
+import frc.robot.CTREConfigs;
 import frc.robot.Robot;
 import frc.robot.telemetry.Log;
+import frc.lib.telemetry.FalconConfigLayout;
 import frc.lib.util.Logger;
 
 // The Shuffleboard Main tab.
@@ -22,6 +24,7 @@ public class SwerveTelemetry {
     //----------------//
     // Tab & Layouts  //
     private ShuffleboardTab m_tab;
+    private FalconConfigLayout driveMod0;
 
     //---------//
     // Widgets //
@@ -32,26 +35,20 @@ public class SwerveTelemetry {
         printLow("Constructing SwerveTab...");
 
         m_tab = Shuffleboard.getTab("Swerve");
-        
-        initializeEditable();
-    }
-
-    //---------------------//
-    // initializeEditable  //
-    //Create all edit widgets, created before subsystem instances are made
-    public void initializeEditable(){
-
     }
 
     //---------------------//
     // initializeViewable  //
     // Create all View Widgets, ones you can't edit, created after subsystem instances are made
-    public void initializeViewable() {
+    public void initialize() {
         driveLayout().withPosition(0, 0);
         moduleLayout("Mod 0", 0, m_tab).withPosition(1, 0);
         moduleLayout("Mod 1", 1, m_tab).withPosition(2, 0);
         moduleLayout("Mod 2", 1, m_tab).withPosition(3, 0);
         moduleLayout("Mod 4", 1, m_tab).withPosition(4, 0);
+        
+        driveMod0 = new FalconConfigLayout("Drive Mod 0", m_tab, Robot.swerve.mSwerveMods[0].mDriveMotor, CTREConfigs.swerveDriveFXConfig);
+        driveMod0.initialize();
     }
 
     public ShuffleboardLayout driveLayout() {
@@ -97,19 +94,19 @@ public class SwerveTelemetry {
     //--------//
     // Update //
     public void update() {     // This will be called in the robotPeriodic
-
+        driveMod0.update();
     }
 
     public static void printLow(String msg) {
-        Logger.println(msg, Log._telemetry, Logger.low1);
+        Log.println(msg, Log._telemetry, Log.low1);
     }
 
     public static void printNormal(String msg) {
-        Logger.println(msg, Log._telemetry, Logger.normal2);
+        Log.println(msg, Log._telemetry, Log.normal2);
     }
 
     public static void printHigh(String msg) {
-        Logger.println(msg, Log._telemetry, Logger.high3);
+        Log.println(msg, Log._telemetry, Log.high3);
     }
 
 }

@@ -5,10 +5,10 @@ package frc.robot.telemetry.shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 
 import java.util.Map;
 
-import frc.robot.Gamepads;
 import frc.robot.Robot;
 import frc.robot.telemetry.Log;
 import frc.lib.util.Logger;
@@ -41,26 +41,18 @@ public class MainTelemetry {
     public MainTelemetry() {
         printLow("Constructing MainTab...");
         m_tab = Shuffleboard.getTab("Main");
-        initializeEditable();
     }
 
     //---------------------//
-    // initializeEditable  //
-    //---------------------//
-    //Create all edit widgets, created before subsystem instances are made
-    public void initializeEditable(){
-
-    }
-
-    //---------------------//
-    // initializeViewable  //
+    // initialize //
     //---------------------//
     // Create all View Widgets, ones you can't edit, created after subsystem instances are made
-    public void initializeViewable() {
+    public void initialize() {
         matchTimeWidget().withPosition(0, 1);
         flashWidget().withPosition(0, 0);
         WidgetsAndLayouts.TalonFXLayout("Climber Motor", m_tab, Robot.climber.motor).withPosition(1, 0);
-        m_tab.addNumber("gamepad y", () -> Gamepads.driver.leftStick.getY()).withPosition(0, 4);
+        m_tab.addNumber("FPGA timestamp", () -> Timer.getFPGATimestamp()).withPosition(0, 4);
+
     }
 
     // Match Time
@@ -83,17 +75,11 @@ public class MainTelemetry {
     //--------//
     // Update //
     //--------//
-    static int t = 0;
     static boolean b = true;
 
-    public void update() {     // This will be called in the robotPeriodic
-        //Flash
-        if (t > 20) {
-            t = 0;
-            b = !b;
-            flashEntry.setBoolean(b);
-        }
-        t++;
+    public void update() {     // This will be called at a rate setup in ShufflbeboardTabs
+        b = !b;
+        flashEntry.setBoolean(b);
     }
 
     public static void printLow(String msg) {

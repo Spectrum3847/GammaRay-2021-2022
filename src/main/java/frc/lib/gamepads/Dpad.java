@@ -3,8 +3,8 @@ package frc.lib.gamepads;
 
 import edu.wpi.first.wpilibj.Joystick;
 import frc.lib.gamepads.AxisButton.ThresholdType;
-import frc.lib.gamepads.XboxController.XboxAxis;
-import frc.lib.gamepads.XboxController.XboxDpad;
+import frc.lib.gamepads.XboxGamepad.XboxAxis;
+import frc.lib.gamepads.XboxGamepad.XboxDpad;
 
 public class Dpad {
 	public final Joystick joy;

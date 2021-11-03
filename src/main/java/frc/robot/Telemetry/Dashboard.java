@@ -1,56 +1,70 @@
+//Created by Spectrum3847
 package frc.robot.telemetry;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.util.Util;
 import frc.robot.Robot;
 
-/*
- * @author matthew, JAG
- */
+//Smart Dashboard Values should mostly be used for quick debugging, we will disable if FMS is connected
 public class Dashboard {
 
-    private static final Notifier dashThread = new Notifier(new dashboardThread());
+    private static final Notifier dashFastThread = new Notifier(new dashboardFastThread());
+    private static final Notifier dashSlowThread = new Notifier(new dashboardSlowThread());
 	
 	public static final boolean ENABLE_DASHBOARD = true;
 	
-	static final double SHORT_DELAY = .02;
-    static final double LONG_DELAY = .5;
-    
-    static double shortOldTime = 0.0;
-    static double longOldTime = 0.0;
+	static final double FAST_DELAY = .02;
+    static final double SLOW_DELAY = .5;
 
     //Put values that you want to use as use inputs here and set their default state
     public static void intializeDashboard() {
-    	if(ENABLE_DASHBOARD){
-            //SmartDashboard.putBoolean("Compressor ENABLE", true);
+    	if(ENABLE_DASHBOARD && !DriverStation.isFMSAttached()){
             SmartDashboard.putBoolean("Limelight-LED Toggle", false);
+            dashFastThread.startPeriodic(FAST_DELAY);
+            dashSlowThread.startPeriodic(SLOW_DELAY);
         }
-        dashThread.startPeriodic(0.02);
     }
 
     //Check each subsystems dashboard values and update them
-    private static void updatePutShort() {
+    private static void updatePutFast() {
         Robot.swerve.dashboard();
         Robot.launcher.dashboard();
         Robot.tower.dashboard();
         Robot.intake.dashboard();
         Robot.indexer.dashboard();
         Robot.climber.dashboard();
-        SmartDashboard.putBoolean("Pressure SW",
-                Robot.compressor.getPressureSwitchValue());
+        SmartDashboard.putBoolean("Pressure SW", Robot.compressor.getPressureSwitchValue());
     }
 
     //Things that don't need to be sent out each cycle
-    private static void updatePutLong(){
+    static boolean b = true;
+    private static void updatePutSlow(){
     	//SmartDashboard.putBoolean("Compressor On?", Robot.pneumatics.compressor.enabled());
 		
 		//Can change to show a different message than "Yes" and "No"
         SmartDashboard.putBoolean("Change Battery", Util.changeBattery());
+        b = !b;
+        SmartDashboard.putBoolean("Disabled Toggle", b);
     }
 
-    public static void updateDashboard() {
+    private static class dashboardFastThread implements Runnable {    
+		@Override
+		public void run() {
+			updatePutFast();
+		}
+	}
+
+    private static class dashboardSlowThread implements Runnable {    
+		@Override
+		public void run() {
+			updatePutSlow();
+		}
+	}
+
+    //Old way we used to update dashboard can be deleted.
+    /*public static void updateDashboard() {
         double time = Timer.getFPGATimestamp();
     	if (ENABLE_DASHBOARD) {
             if ((time - shortOldTime) > SHORT_DELAY) {
@@ -63,26 +77,5 @@ public class Dashboard {
                 updatePutLong();
             }
         }
-    }
-    
-    static int t = 0;
-    static boolean b = true;
-    
-    public static void dashboardFlash(){
-        //Flash a light on the dashboard so that you know that the dashboard is refreshing.
-        if (t > 20) {
-            t = 0;
-            b = !b;
-            SmartDashboard.putBoolean("Disabled Toggle", b);
-        }
-        t++;
-    }
-
-    private static class dashboardThread implements Runnable {
-        
-		@Override
-		public void run() {
-			updateDashboard();
-		}
-	}
+    }*/
 }

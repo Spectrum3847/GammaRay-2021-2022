@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.lib.gamepads.AndButton;
-import frc.lib.gamepads.XboxController;
+import frc.lib.gamepads.XboxGamepad;
 import frc.lib.util.Logger;
 import frc.robot.Robot.RobotState;
 import frc.robot.commands.FeedBalls;
@@ -19,8 +19,8 @@ import frc.robot.telemetry.Log;
 
 public class Gamepads {
 	// Create Joysticks first so they can be used in defaultCommands
-	public static XboxController driver = new XboxController(0, .15, .15);
-	public static XboxController operator = new XboxController(1, .06, .05);
+	public static XboxGamepad driver = new XboxGamepad(0, .15, .15);
+	public static XboxGamepad operator = new XboxGamepad(1, .06, .05);
 	public static boolean driverConfigured = false;
 	public static boolean operatorConfigured = false;
 	public static String name = Log._controls;

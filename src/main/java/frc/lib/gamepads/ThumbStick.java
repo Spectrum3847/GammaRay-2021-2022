@@ -3,7 +3,7 @@ package frc.lib.gamepads;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-import frc.lib.gamepads.XboxController.XboxAxis;
+import frc.lib.gamepads.XboxGamepad.XboxAxis;
 import frc.lib.mapping.ExpCurve;
 
 //Based on Code form Bob319 2017
@@ -47,25 +47,21 @@ public class ThumbStick {
 		return  value;
 	}
 
-	public void configXCurve (double expVal, double offset, double scalar){
+	public void configXCurve (double expVal,  double scalar){
 		expXCurve.setExpVal(expVal);
-		expXCurve.setOffset(offset);
 		expXCurve.setScalar(scalar);
 	}
 
-	public void configYCurve (double expVal, double offset, double scalar){
+	public void configYCurve (double expVal,  double scalar){
 		expYCurve.setExpVal(expVal);
-		expYCurve.setOffset(offset);
 		expYCurve.setScalar(scalar);
 
 	}
 
-	public void configCurves (double expVal, double offset, double scalar){
+	public void configCurves (double expVal,  double scalar){
 		expXCurve.setExpVal(expVal);
-		expXCurve.setOffset(offset);
 		expXCurve.setScalar(scalar);
 		expYCurve.setExpVal(expVal);
-		expYCurve.setOffset(offset);
 		expYCurve.setScalar(scalar);
 	}
 	

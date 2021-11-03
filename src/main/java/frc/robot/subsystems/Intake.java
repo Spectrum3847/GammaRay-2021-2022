@@ -62,8 +62,6 @@ public class Intake extends SubsystemBase{
   }
 
   public void dashboard() {
-    SmartDashboard.putNumber("Intake/Output", motor.getMotorOutputPercent());
-    SmartDashboard.putNumber("Intake/Current", motor.getSupplyCurrent());
   }
 
   public static void printDebug(String msg){

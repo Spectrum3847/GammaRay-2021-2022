@@ -1,7 +1,7 @@
 //Based on Code from Team364 - BaseFalconSwerve
 //https://github.com/Team364/BaseFalconSwerve/tree/338c0278cb63714a617f1601a6b9648c64ee78d1
 
-package frc.lib.util;
+package frc.lib.swerve;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;

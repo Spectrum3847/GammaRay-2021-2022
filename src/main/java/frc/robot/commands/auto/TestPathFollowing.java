@@ -16,9 +16,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.Constants.AutoConstants;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+//Need to work on setting an intial position for the field2D map to work properly.
 public class TestPathFollowing extends SequentialCommandGroup {
   /** Creates a new TestPathFollowing. */
   public TestPathFollowing() {
@@ -36,17 +34,16 @@ Trajectory exampleTrajectory =
         // Pass through these two interior waypoints, making an 's' curve path
         List.of(new Translation2d(1, -0.5), new Translation2d(2, -0.5)),
         // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3.0, -0.5, new Rotation2d(90)),
+        new Pose2d(3.0, -0.5, new Rotation2d(0)),
         config);
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+
 
     addCommands(
-      new SwerveTrajectoryFollow(exampleTrajectory, this::zeroRotation)
+      new SwerveTrajectoryFollow(exampleTrajectory, this::finalRotation)
     );
   }
 
-  Rotation2d zeroRotation(){
+  Rotation2d finalRotation(){
     return new Rotation2d(Math.PI);
   }
 }

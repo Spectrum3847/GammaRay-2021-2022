@@ -8,16 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.lib.gamepads.XboxController;
+import frc.lib.gamepads.XboxGamepad;
 
 /**
  * An example command.  You can replace me with your own command.
  */
 public class RumbleController extends CommandBase {
-  private XboxController controller;
+  private XboxGamepad controller;
   private double value;
 
-  public RumbleController(XboxController controller, double value) {
+  public RumbleController(XboxGamepad controller, double value) {
     // Use requires() here to declare subsystem dependencies
     //requires(Robot.m_subsystem);\
     this.controller = controller;

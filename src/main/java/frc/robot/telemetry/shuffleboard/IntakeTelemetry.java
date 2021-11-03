@@ -10,10 +10,6 @@ import frc.lib.util.Logger;
 
 // The Shuffleboard Main tab.
 public class IntakeTelemetry {
-
-     //----------------//
-    // Default Values //
-
     //---------------------//
     // NetworkTableEntries //
 
@@ -29,23 +25,15 @@ public class IntakeTelemetry {
     public IntakeTelemetry() {
         printLow("Constructing IntakeTab...");
         m_tab = Shuffleboard.getTab("Intake");
-        initializeEditable();
     }
 
     //---------------------//
-    // initializeEditable  //
-    //Create all edit widgets, created before subsystem instances are made
-    public void initializeEditable(){
-
-    }
-
-    //---------------------//
-    // initializeViewable  //
+    // initialize //
     // Create all View Widgets, ones you can't edit, created after subsystem instances are made
-    public void initializeViewable() {
+    public void initialize() {
         //intakeLayout(m_tab).withPosition(0, 0);
         WidgetsAndLayouts.TalonFXLayout("Motor", m_tab, Robot.intake.motor).withPosition(0, 0);
-        WidgetsAndLayouts.SolenoidWidget("Solenoid", m_tab, Robot.intake.solDown).withPosition(1, 0);
+        WidgetsAndLayouts.SolenoidWidget("Solenoid", m_tab, Robot.intake.solDown).withPosition(1, 0).withSize(1, 1);
     }
 
     //--------//

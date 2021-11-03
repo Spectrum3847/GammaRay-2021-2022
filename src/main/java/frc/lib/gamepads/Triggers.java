@@ -2,7 +2,7 @@
 package frc.lib.gamepads;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.lib.gamepads.XboxController.XboxAxis;
+import frc.lib.gamepads.XboxGamepad.XboxAxis;
 
 public class Triggers {
 	Joystick controller;

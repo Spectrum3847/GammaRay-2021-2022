@@ -121,19 +121,19 @@ public void setLimeLightPipeline(int i) {
 }
 
 public static void printDebug(String msg){
-  Logger.println(msg, name, Logger.low1);
+  Log.println(msg, name, Log.low1);
 }
 
 public static void printInfo(String msg){
-  Logger.println(msg, name, Logger.normal2);
+  Log.println(msg, name, Log.normal2);
 }
 
 public static void printWarning(String msg) {
-  Logger.println(msg, name, Logger.high3);
+  Log.println(msg, name, Log.high3);
 }
 
 public static void printError(String msg) {
-  Logger.println(msg, name, Logger.critical4);
+  Log.println(msg, name, Log.critical4);
 }
 
 }

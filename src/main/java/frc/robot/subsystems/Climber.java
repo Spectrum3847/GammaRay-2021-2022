@@ -71,8 +71,6 @@ public class Climber extends SubsystemBase {
   }
 
   public void dashboard() {
-    SmartDashboard.putNumber("Climber/Output", motor.getMotorOutputPercent());
-    SmartDashboard.putNumber("Climber/Current", motor.getSupplyCurrent());
   }
 
   public static void printDebug(String msg){

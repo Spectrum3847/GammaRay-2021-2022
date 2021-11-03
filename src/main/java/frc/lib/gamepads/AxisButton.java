@@ -3,7 +3,7 @@
 package frc.lib.gamepads;
 
 import edu.wpi.first.wpilibj2.command.button.Button;
-import frc.lib.gamepads.XboxController.XboxAxis;
+import frc.lib.gamepads.XboxGamepad.XboxAxis;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 

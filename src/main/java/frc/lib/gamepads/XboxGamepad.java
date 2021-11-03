@@ -4,19 +4,19 @@ package frc.lib.gamepads;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.lib.gamepads.AxisButton.ThresholdType;
 
-public class XboxController extends Joystick {
+public class XboxGamepad extends Joystick {
 
-	public XboxController(int port) {
+	public XboxGamepad(int port) {
 		super(port);
 	}
 	
-	public XboxController(int port, double xDeadband, double yDeadband) {
+	public XboxGamepad(int port, double xDeadband, double yDeadband) {
 		this(port);
 		this.leftStick.setDeadband(xDeadband, yDeadband);
 		this.rightStick.setDeadband(xDeadband, yDeadband);
 	}	
 
-	public XboxController(int port, double leftXDeadband, double leftYDeadband, double rightXDeadband, double rightYDeadband) {
+	public XboxGamepad(int port, double leftXDeadband, double leftYDeadband, double rightXDeadband, double rightYDeadband) {
 		this(port);
 		this.leftStick.setDeadband(leftXDeadband, leftYDeadband);
 		this.rightStick.setDeadband(rightXDeadband, rightYDeadband);

@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -10,7 +6,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import frc.lib.util.SwerveModuleConstants;
+import frc.lib.swerve.SwerveModuleConstants;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -134,6 +130,8 @@ public final class Constants {
 
     }
 
+    
+
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
@@ -177,4 +175,6 @@ public final class Constants {
     public static final class ClimberConstants{
         public static final int kClimberMotor = 60;
     }   
+
+
 }
