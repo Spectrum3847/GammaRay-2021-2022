@@ -11,7 +11,6 @@ import java.util.Map;
 
 import frc.robot.Robot;
 import frc.robot.telemetry.Log;
-import frc.lib.telemetry.WidgetsAndLayouts;
 import frc.lib.util.Logger;
 
 // The Shuffleboard Main tab.
@@ -51,7 +50,6 @@ public class MainTelemetry {
     public void initialize() {
         matchTimeWidget().withPosition(0, 1);
         flashWidget().withPosition(0, 0);
-        WidgetsAndLayouts.TalonFXLayout("Climber Motor", m_tab, Robot.climber.motor).withPosition(1, 0);
         m_tab.addNumber("FPGA timestamp", () -> Timer.getFPGATimestamp()).withPosition(0, 4);
 
     }

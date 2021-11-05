@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.util.SpectrumPreferences;
 import frc.lib.sim.PhysicsSim;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
@@ -37,7 +36,6 @@ public class Robot extends TimedRobot {
     public static final Indexer indexer = new Indexer();
     public static final Tower tower = new Tower();
     public static final Launcher launcher = new Launcher();
-    public static final Climber climber = new Climber();
     public static final VisionLL visionLL = new VisionLL();
     public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
     public static PowerDistribution pdp = new PowerDistribution(0, ModuleType.kCTRE);
