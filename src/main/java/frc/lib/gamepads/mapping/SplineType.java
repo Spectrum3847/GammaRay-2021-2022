@@ -1,6 +1,6 @@
 //Created by Spectrum3847
 //Based on Code from FRC# 2363
-package frc.lib.mapping;
+package frc.lib.gamepads.mapping;
 
 /**
  * Types of splines that can be used with <code>SplineCurve</code>.

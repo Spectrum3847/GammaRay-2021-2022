@@ -9,26 +9,21 @@ import frc.lib.telemetry.FalconConfigLayout;
 import frc.lib.telemetry.WidgetsAndLayouts;
 
 public class TowerTelemetry {
-     //---------------------//
     // NetworkTableEntries //
 
-    //----------------//
     // Tab & Layouts  //
     private static ShuffleboardTab m_tab;
     private FalconConfigLayout towerFrontConfigLayout;
     private FalconConfigLayout towerRearConfigLayout;
 
-    //---------//
     // Widgets //
 
-    //--------------//
     // Constructor  //
     public TowerTelemetry() {
         printLow("Constructing TowerTab...");
         m_tab = Shuffleboard.getTab("Tower"); // Create the tab
     }
 
-    //---------------------//
     // initialize //
     // Create all View Widgets, ones you can't edit, created after subsystem instances are made
     public void initialize() {
@@ -38,7 +33,6 @@ public class TowerTelemetry {
         towerFrontConfigLayout.initialize();
     }
 
-    //--------//
     // Update //
     public void update() {     // This will be called in the robotPeriodic
         towerFrontConfigLayout.update();
@@ -46,7 +40,6 @@ public class TowerTelemetry {
     }
 
     // UNTESTED!!!
-    //---------------------//
     // Clear Persistent Date // 
     public void clearPersistentData() {
         printNormal("Clearing Tower Tab Persistent");

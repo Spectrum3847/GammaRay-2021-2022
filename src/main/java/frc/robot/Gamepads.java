@@ -3,15 +3,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.lib.gamepads.AndButton;
 import frc.lib.gamepads.XboxGamepad;
 import frc.lib.util.Logger;
 import frc.robot.Robot.RobotState;
-import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.ResetGyro;
-import frc.robot.commands.ballpath.FeedBalls;
+import frc.robot.commands.ballpath.BallPath;
+import frc.robot.commands.ballpath.IntakeBalls;
 import frc.robot.commands.swerve.ClimberSwerve;
 import frc.robot.commands.swerve.LLAim;
 import frc.robot.commands.swerve.TurnToAngle;
@@ -108,42 +106,27 @@ public class Gamepads {
 		operator.leftTriggerButton.whileHeld(new IntakeBalls());
 
 		// Indexer
-		operator.selectButton.whileHeld(new FeedBalls());
-		operator.selectButton.whileHeld(new RunCommand(() -> Robot.intake.setManualOutput(0.3), Robot.intake));
+		operator.selectButton.whileHeld(BallPath.feed());
 
 		// Tower
-		operator.startButton.whileHeld(new RunCommand(() -> Robot.tower.setPercentModeOutput(0.5), Robot.tower));
-
-		// Don't use
-		new AndButton(operator.rightTriggerButton, operator.aButton)
-				.whileHeld(new RunCommand(() -> Robot.launcher.setLauncherVelocity(3500), Robot.launcher)
-						.alongWith(new RunCommand(() -> Robot.tower.setTowerVelocity(1700))));
+		operator.startButton.whileHeld(BallPath.runTower(0.5));
 
 		// Trench
 		new AndButton(operator.rightTriggerButton, operator.bButton)
-				.whileHeld(new RunCommand(() -> Robot.launcher.setLauncherVelocity(5000), Robot.launcher)
-						.alongWith(new RunCommand(() -> Robot.tower.setTowerVelocity(1700))));
+				.whileHeld(BallPath.setRPMs(5000, 1700));
 
 		// Intiantion line
 		new AndButton(operator.rightTriggerButton, operator.xButton)
-				.whileHeld(new RunCommand(() -> Robot.launcher.setLauncherVelocity(4500), Robot.launcher)
-						.alongWith(new RunCommand(() -> Robot.tower.setTowerVelocity(1700))));
+				.whileHeld(BallPath.setRPMs(4500, 1700));
 
 		// Hood
-		operator.Dpad.Up.whenPressed(new RunCommand(() -> Robot.launcher.setHood(1.0), Robot.launcher));
-		operator.Dpad.Down.whenPressed(new RunCommand(() -> Robot.launcher.setHood(0), Robot.launcher));
-		operator.Dpad.Left.whenPressed(new RunCommand(() -> Robot.launcher.setHood(0.33), Robot.launcher));
-		operator.Dpad.Right.whenPressed(new RunCommand(() -> Robot.launcher.setHood(0.66), Robot.launcher));
+		operator.Dpad.Up.whenPressed(BallPath.setHood(1.0));
+		operator.Dpad.Down.whenPressed(BallPath.setHood(0));
+		operator.Dpad.Left.whenPressed(BallPath.setHood(0.33));
+		operator.Dpad.Right.whenPressed(BallPath.setHood(0.66));
 
 		// Unjam all the things
-		operator.leftBumper.whileHeld(new RunCommand(() -> Robot.intake.setManualOutput(-0.5))
-				.alongWith(new RunCommand(() -> Robot.indexer.setManualOutput(-Robot.indexer.feedSpeed), Robot.indexer)
-						.alongWith(new RunCommand(() -> Robot.tower.setPercentModeOutput(-0.3), Robot.tower)
-							.alongWith(new RunCommand(() -> Robot.launcher.setPercentModeOutput(-0.5), Robot.launcher)
-										.alongWith(new StartEndCommand(() -> Robot.intake.down(),() -> Robot.intake.up()
-		))))));
-
-		operator.yButton.whileHeld(new RunCommand(() -> Robot.climber.setManualOutput(-1), Robot.climber));
+		operator.leftBumper.whileHeld(BallPath.unJamAll());
 	}
 
 	// Configure the button bindings for the driver control in Test Mode

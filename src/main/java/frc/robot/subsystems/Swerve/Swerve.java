@@ -9,9 +9,10 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
-import frc.robot.Constants.SwerveConstants;
-import frc.robot.Constants.AutoConstants;
 import frc.robot.commands.swerve.TeleopSwerve;
+import frc.robot.constants.AutoConstants;
+import frc.robot.constants.SwerveConstants;
+import frc.robot.constants.Constants.CanIDs;
 import frc.robot.telemetry.Log;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -45,7 +46,7 @@ public class Swerve extends SubsystemBase {
 
     public Swerve() {
         setName(name);
-        gyro = new PigeonIMU(SwerveConstants.pigeonID);
+        gyro = new PigeonIMU(CanIDs.pigeonID);
         gyro.configFactoryDefault();
         zeroGyro();
         

@@ -1,7 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
+//Created by Spectrum3847
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -13,8 +10,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
-import frc.robot.Constants;
 import frc.robot.Gamepads;
+import frc.robot.constants.Constants.CanIDs;
 import frc.robot.telemetry.Log;
 
 public class Climber extends SubsystemBase {
@@ -25,7 +22,7 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   public Climber() {  
     setName(name);
-    motor = new WPI_TalonFX(Constants.ClimberConstants.kClimberMotor);
+    motor = new WPI_TalonFX(CanIDs.kClimberMotor);
     motor.setInverted(false);
     SupplyCurrentLimitConfiguration supplyCurrentLimit = new SupplyCurrentLimitConfiguration(false, 160, 1600, 10);
     motor.configSupplyCurrentLimit(supplyCurrentLimit);

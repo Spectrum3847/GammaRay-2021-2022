@@ -1,6 +1,6 @@
-//Created by Spectrum3847
+//Spectrum 3847
 //Based on Code from FRC# 2363
-package frc.lib.mapping;
+package frc.lib.gamepads.mapping;
 
 /**
  * This class and its subclasses remap controller stick inputs

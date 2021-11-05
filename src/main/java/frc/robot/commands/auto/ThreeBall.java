@@ -1,7 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
+//Created by Spectrum3847
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -9,9 +6,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
-import frc.robot.commands.SwerveDrive;
 import frc.robot.commands.ballpath.FeedBalls;
-import frc.robot.commands.ballpath.shooterVel;
+import frc.robot.commands.ballpath.ShooterVel;
+import frc.robot.commands.swerve.SwerveDrive;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -24,7 +21,7 @@ public class ThreeBall extends SequentialCommandGroup {
     addCommands(
       new ParallelCommandGroup(
         new RunCommand(() -> Robot.launcher.setHood(Robot.launcher.intitationLineShot)),
-        new shooterVel(4500),  //Shooter spinup
+        new ShooterVel(4500),  //Shooter spinup
         new SequentialCommandGroup(
           new WaitCommand(1),
           new FeedBalls().withTimeout(4).alongWith(new RunCommand(() -> Robot.intake.setManualOutput(0.3), Robot.intake)) //tower feed

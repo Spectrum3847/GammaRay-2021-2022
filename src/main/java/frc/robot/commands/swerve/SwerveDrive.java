@@ -1,10 +1,11 @@
+//Created by Spectrum3847
 //Based on Code from Team364 - BaseFalconSwerve
 //https://github.com/Team364/BaseFalconSwerve/tree/338c0278cb63714a617f1601a6b9648c64ee78d1
 
-package frc.robot.commands;
+package frc.robot.commands.swerve;
 
-import frc.robot.Constants.SwerveConstants;
 import frc.robot.Robot;
+import frc.robot.constants.SwerveConstants;
 import frc.robot.subsystems.Swerve.Swerve;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;

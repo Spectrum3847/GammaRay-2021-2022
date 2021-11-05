@@ -10,7 +10,8 @@ import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorTimeBase;
-import frc.robot.Constants.SwerveConstants;
+
+import frc.robot.constants.SwerveConstants;
 
 public final class SwerveCTREConfigs {
     public static TalonFXConfiguration swerveAngleFXConfig;

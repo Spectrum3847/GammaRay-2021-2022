@@ -13,7 +13,7 @@ public class OrButton extends Button {
 		b2 = button2;
 	}
 
-	public boolean get(){
+	public boolean get() {
 		return b1.get() || b2.get();
 	}
 }

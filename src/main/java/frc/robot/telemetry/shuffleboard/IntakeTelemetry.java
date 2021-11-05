@@ -34,7 +34,7 @@ public class IntakeTelemetry {
     public void initialize() {
         //intakeLayout(m_tab).withPosition(0, 0);
         WidgetsAndLayouts.TalonFXLayout("Motor", m_tab, Robot.intake.motor).withPosition(0, 0);
-        WidgetsAndLayouts.SolenoidWidget("Solenoid", m_tab, Robot.intake.solDown).withPosition(1, 0).withSize(1, 1);
+        WidgetsAndLayouts.SolenoidWidget("Solenoid", m_tab, Robot.intake.sol.solDown).withPosition(1, 0).withSize(1, 1);
     }
 
     //--------//

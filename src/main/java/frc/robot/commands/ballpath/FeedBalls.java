@@ -22,7 +22,7 @@ public class FeedBalls extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.indexer.feed(); //turn on to begin feeding
+    Robot.indexer.runFwd(); //turn on to begin feeding
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,20 +38,19 @@ public class FeedBalls extends CommandBase {
       //Thing that should be updated every LONG_DELAY
       oldTime = time;
       state = 2;
-      Robot.indexer.feedRev(); //Turn on once we have been off for too long
+      Robot.indexer.runRev(); //Turn on once we have been off for too long
     }    
     if ((time - oldTime) > Robot.indexer.feedRevPulse && state == 2) {
       //Thing that should be updated every LONG_DELAY
       oldTime = time;
       state = 0;
-      Robot.indexer.feed(); //Turn on once we have been off for too long
+      Robot.indexer.runFwd(); //Turn on once we have been off for too long
     }
   }   
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.intake.up();
     //intake stops using default command
   }
 

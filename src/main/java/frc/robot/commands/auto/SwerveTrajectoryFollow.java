@@ -1,11 +1,12 @@
+//Created by Spectrum3847
 package frc.robot.commands.auto;
 
 import java.util.function.Supplier;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import frc.robot.Constants.SwerveConstants;
 import frc.robot.Robot;
+import frc.robot.constants.SwerveConstants;
 import frc.robot.subsystems.Swerve.Swerve;
 
 /** This class is just a wrapper for SwerveControllerCommand to make it easier to call for our swerve drive.

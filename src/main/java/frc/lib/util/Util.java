@@ -1,13 +1,11 @@
+//Created by Spectrum3847
 package frc.lib.util;
 
 import java.util.List;
-
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
-import frc.robot.Constants;
+import frc.robot.constants.Constants;
 
 /**
  * Contains basic functions that are used often.
@@ -57,23 +55,6 @@ public class Util {
     }
     
     /*******************************************************************************
-	 * KEEP MOVING AVERAGES OF CURRENT THROUGH EACH MOTOR
-	 * Probably not the best way, especially if we are recording values a lot more frequently than we are actually updating our moving average
-	 ******************************************************************************/
-	private static double[] currentValues/* = new double[number]*/; //Let number be the number of terms you want to average
-	private static int count = 0;
-	private static int total = 0;
-	public static double movingAvgCurrent(TalonSRX motor) {
-		double a = motor.getStatorCurrent();
-		if (currentValues[count] != 0) {
-			total -= currentValues[count];
-		}
-		total += a;
-		currentValues[count] = a;
-		return total / currentValues.length;
-	}
-    
-    /*******************************************************************************
 	 * VALUE FOR CHANGE BATTERY ON DASHBOARD
 	 * Should return true if robot is disabled and voltage is less than 12
 	 ******************************************************************************/
@@ -84,6 +65,7 @@ public class Util {
     public static boolean closeTo(double a, double b, double epsilon) {
         return epsilonEquals(a,b,epsilon);
     }
+
     public static boolean epsilonEquals(double a, double b, double epsilon) {
         return (a - epsilon <= b) && (a + epsilon >= b);
     }

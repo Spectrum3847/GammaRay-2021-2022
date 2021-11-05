@@ -4,7 +4,7 @@ package frc.lib.gamepads;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.lib.gamepads.XboxGamepad.XboxAxis;
-import frc.lib.mapping.ExpCurve;
+import frc.lib.gamepads.mapping.ExpCurve;
 
 //Based on Code form Bob319 2017
 public class ThumbStick {

@@ -1,7 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
+//Created by Spectrum3847
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -12,7 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.SpectrumSolenoid;
 import frc.lib.util.Logger;
 import frc.lib.util.TalonFXSetup;
-import frc.robot.Constants;
+import frc.robot.constants.Constants.CanIDs;
+import frc.robot.constants.Constants.SolenoidPorts;
 import frc.robot.telemetry.Log;
 
 public class Intake extends SubsystemBase{
@@ -21,18 +19,17 @@ public class Intake extends SubsystemBase{
   public final double intakeSpeed = 0.75;
 
   public final WPI_TalonFX motor;
-  public final SpectrumSolenoid solDown;
+  public final solenoid sol;
   
 
   /** Creates a new Intake. */
   public Intake() {  
     setName(name);
-    motor = new WPI_TalonFX(Constants.IntakeConstants.kIntakeMotor);
+    motor = new WPI_TalonFX(CanIDs.kIntakeMotor);
     TalonFXSetup.defaultSetup(motor, false, 40);
-    
-    solDown = new SpectrumSolenoid(Constants.IntakeConstants.kIntakeDown);
+    sol = new solenoid();
 
-    this.setDefaultCommand(new RunCommand(() -> stop(), this));
+    this.setDefaultCommand(new RunCommand(() -> disableIntake(), this));
   }
 
   @Override
@@ -48,16 +45,12 @@ public class Intake extends SubsystemBase{
     setManualOutput(intakeSpeed);
   }
 
-  public void stop(){
-    motor.set(ControlMode.PercentOutput, 0);
-  }
-  
- public void up(){
-    solDown.set(false);
+  public void stopMotor(){
+    motor.stopMotor();;
   }
 
-  public void down(){
-    solDown.set(true);
+  public void disableIntake(){
+    stopMotor();
   }
 
   public void dashboard() {
@@ -77,5 +70,24 @@ public class Intake extends SubsystemBase{
 
   public static void printError(String msg) {
     Logger.println(msg, name, Logger.critical4);
+  }
+
+  public class solenoid extends SubsystemBase{
+    public final SpectrumSolenoid solDown;
+
+    public solenoid(){
+      setName(name + " solenoid");
+      solDown = new SpectrumSolenoid(SolenoidPorts.kIntakeDown);
+
+      this.setDefaultCommand(new RunCommand(() -> up(), this));
+    }
+
+    public void up(){
+      solDown.set(false);
+    }
+  
+    public void down(){
+      solDown.set(true);
+    }
   }
 }

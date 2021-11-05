@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
 import frc.lib.util.TalonFXSetup;
-import frc.robot.Constants.TowerConstants;
 import frc.robot.constants.TowerFalconConfig;
+import frc.robot.constants.Constants.CanIDs;
 import frc.robot.telemetry.Log;
 
 
@@ -41,7 +41,7 @@ public class Tower extends SubsystemBase {
     iZone = (int) SpectrumPreferences.getInstance().getNumber("Tower I-Zone", 150);
 
     
-    motorFront = new WPI_TalonFX(TowerConstants.kTowerMotorFront);
+    motorFront = new WPI_TalonFX(CanIDs.kTowerMotorFront);
     TalonFXSetup.defaultSetup(motorFront, TowerFalconConfig.kInverted, 60);
     motorFront.configSupplyCurrentLimit(TowerFalconConfig.supplyLimit);
     motorFront.setNeutralMode(TowerFalconConfig.kNeutralMode);
@@ -55,7 +55,7 @@ public class Tower extends SubsystemBase {
 
     motorFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
-    motorRear = new WPI_TalonFX(TowerConstants.kTowerMotorRear);
+    motorRear = new WPI_TalonFX(CanIDs.kTowerMotorRear);
     TalonFXSetup.defaultSetup(motorRear, !TowerFalconConfig.kInverted, 60); //should be inverse of motorFront
     motorRear.configSupplyCurrentLimit(TowerFalconConfig.supplyLimit);
     motorRear.setNeutralMode(TowerFalconConfig.kNeutralMode);
@@ -71,7 +71,7 @@ public class Tower extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setPercentModeOutput(double speed){
+  public void setManualOutput(double speed){
     motorFront.set(ControlMode.PercentOutput, speed);
   }
 
@@ -85,7 +85,7 @@ public class Tower extends SubsystemBase {
     motorFront.set(ControlMode.Velocity, motorVelocity);
   }
 
-  public void setTowerVelocity(double wheelRPM){
+  public void setRPM(double wheelRPM){
     //Sensor Velocity in ticks per 100ms / Sensor Ticks per Rev * 600 (ms to min) * 1.5 gear ratio to shooter
     //Motor Velocity in RPM / 600 (ms to min) * Sensor ticks per rev / Gear Ratio 16 to 40
     double motorVelocity = (wheelRPM / 600 * 2048) / 0.4;

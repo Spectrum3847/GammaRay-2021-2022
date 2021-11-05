@@ -1,3 +1,4 @@
+//Spectrum 3847
 package frc.lib.drivers;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -177,23 +178,6 @@ public class LimeLight {
         return mode;
     }
 
-    /**
-     * pipeline Sets limelight’s current pipeline
-     * 
-     * 0 . 9	Select pipeline 0.9
-     * 
-     * @param pipeline
-     */
-    /* public void setPipeline(Double pipeline) {
-        if(pipeline<0){
-            pipeline = 0.0;
-            throw new IllegalArgumentException("Pipeline can not be less than zero");
-        }else if(pipeline>9){
-            pipeline = 9.0;
-            throw new IllegalArgumentException("Pipeline can not be greater than nine");
-        }
-        m_table.getEntry("pipeline").setValue(pipeline);
-    } */
 
      /**
      * pipeline Sets limelight’s current pipeline

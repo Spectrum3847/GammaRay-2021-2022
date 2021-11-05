@@ -1,7 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
+//Created by Spectrum3847
 package frc.robot.commands.auto;
 
 import java.util.List;
@@ -13,8 +10,8 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants.SwerveConstants;
-import frc.robot.Constants.AutoConstants;
+import frc.robot.constants.AutoConstants;
+import frc.robot.constants.SwerveConstants;
 
 //Need to work on setting an intial position for the field2D map to work properly.
 public class TestPathFollowing extends SequentialCommandGroup {

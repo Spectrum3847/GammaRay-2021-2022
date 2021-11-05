@@ -1,16 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
+//Created by Spectrum3847
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -20,7 +13,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
-import frc.robot.Constants;
+import frc.robot.constants.Constants.CanIDs;
+import frc.robot.constants.Constants.PWMPorts;
 import frc.robot.telemetry.Log;
 
 public class Launcher extends SubsystemBase {
@@ -50,7 +44,7 @@ public class Launcher extends SubsystemBase {
     iZone = (int) SpectrumPreferences.getInstance().getNumber("Launcher I-Zone", 150);
 
     
-    motorLeft = new WPI_TalonFX(Constants.LauncherConstants.kLauncherMotorLeft);
+    motorLeft = new WPI_TalonFX(CanIDs.kLauncherMotorLeft);
     motorLeft.setInverted(true);
     SupplyCurrentLimitConfiguration supplyCurrentLimit = new SupplyCurrentLimitConfiguration(true, 40, 45, 0.5);
     motorLeft.configSupplyCurrentLimit(supplyCurrentLimit);
@@ -65,7 +59,7 @@ public class Launcher extends SubsystemBase {
 
     motorLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
-    motorRight = new WPI_TalonFX(Constants.LauncherConstants.kFollowerMotorRight);
+    motorRight = new WPI_TalonFX(CanIDs.kFollowerMotorRight);
     motorRight.setInverted(false);   //should be inverse of motorLeft
     motorRight.configSupplyCurrentLimit(supplyCurrentLimit);
     motorRight.follow(motorLeft);
@@ -74,8 +68,8 @@ public class Launcher extends SubsystemBase {
     SpectrumPreferences.getInstance().getNumber("Launcher Setpoint", 1000);
 
 
-    leftHood = new Servo(Constants.LauncherConstants.kHoodServoLeft);
-    rightHood = new Servo(Constants.LauncherConstants.kHoodServoRight);
+    leftHood = new Servo(PWMPorts.kHoodServoLeft);
+    rightHood = new Servo(PWMPorts.kHoodServoRight);
     leftHood.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
     rightHood.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
     this.setHood(intitationLineShot);
@@ -87,7 +81,7 @@ public class Launcher extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setPercentModeOutput(double speed){
+  public void setManualOutput(double speed){
     motorLeft.set(ControlMode.PercentOutput, speed);
   }
 
@@ -106,7 +100,7 @@ public class Launcher extends SubsystemBase {
     motorLeft.set(ControlMode.Velocity, motorVelocity);
   }
 
-  public void setLauncherVelocity(double wheelRPM){
+  public void setRPM(double wheelRPM){
     //Sensor Velocity in ticks per 100ms / Sensor Ticks per Rev * 600 (ms to min) * 1.5 gear ratio to shooter
     //Motor Velocity in RPM / 600 (ms to min) * Sensor ticks per rev / Gear Ratio 42to24
     double motorVelocity = (wheelRPM / 600 * 2048) / 1.75;
@@ -117,7 +111,7 @@ public class Launcher extends SubsystemBase {
     return (motorLeft.getSelectedSensorVelocity() * 1.75) / 2048 * 600;
   }
   public void full(){
-    setPercentModeOutput(1.0);
+    setManualOutput(1.0);
   }
 
   public void setHood(double value){
