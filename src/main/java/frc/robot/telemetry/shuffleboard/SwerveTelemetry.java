@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import java.util.Map;
 
 import frc.robot.Robot;
-import frc.robot.subsystems.Swerve.SwerveCTREConfigs;
+
 import frc.robot.telemetry.Log;
 import frc.lib.telemetry.FalconConfigLayout;
 
