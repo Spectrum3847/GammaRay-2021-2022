@@ -25,7 +25,7 @@ public class TowerTelemetry {
     // Constructor  //
     public TowerTelemetry() {
         printLow("Constructing TowerTab...");
-        m_tab = Shuffleboard.getTab("Tower");
+        m_tab = Shuffleboard.getTab("Tower"); // Create the tab
     }
 
     //---------------------//
