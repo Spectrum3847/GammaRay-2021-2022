@@ -34,7 +34,6 @@ public class Dashboard {
         Robot.tower.dashboard();
         Robot.intake.dashboard();
         Robot.indexer.dashboard();
-        Robot.climber.dashboard();
         SmartDashboard.putBoolean("Pressure SW", Robot.compressor.getPressureSwitchValue());
     }
 
