@@ -9,13 +9,13 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class TalonFXSetup {
 
-    public static void defaultSetup(TalonFX motor, boolean inverted, double currentLimit){
+    public static void defaultSetup(TalonFX motor, boolean isInverted, double currentLimit){
         motor.configFactoryDefault();
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         motor.configVoltageCompSaturation(12);  //default 12v voltage compensation for motors
         motor.enableVoltageCompensation(true);  //enable voltage compensation
         simpleCurrentLimit(motor, currentLimit);
-        motor.setInverted(inverted);
+        motor.setInverted(isInverted);
         defaultStatusFrames(motor);
     }
 
