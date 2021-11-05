@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 
 import frc.robot.Robot;
 import frc.robot.telemetry.Log;
+import frc.lib.telemetry.WidgetsAndLayouts;
 import frc.lib.util.Logger;
 
 // The Shuffleboard Main tab.

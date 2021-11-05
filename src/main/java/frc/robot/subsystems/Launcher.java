@@ -71,15 +71,6 @@ public class Launcher extends SubsystemBase {
     motorRight.follow(motorLeft);
     motorRight.setNeutralMode(NeutralMode.Coast);
 
-    int time = 255;
-    motorRight.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, time);
-    motorRight.setStatusFramePeriod(StatusFrame.Status_6_Misc, time);
-    motorRight.setStatusFramePeriod(StatusFrame.Status_7_CommStatus, time);
-    motorRight.setStatusFramePeriod(StatusFrame.Status_9_MotProfBuffer, time);
-    motorRight.setStatusFramePeriod(StatusFrame.Status_10_MotionMagic, time);
-    motorRight.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, time);
-    motorRight.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, time);
-
     SpectrumPreferences.getInstance().getNumber("Launcher Setpoint", 1000);
 
 

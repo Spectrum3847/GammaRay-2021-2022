@@ -9,9 +9,9 @@ import frc.lib.gamepads.AndButton;
 import frc.lib.gamepads.XboxGamepad;
 import frc.lib.util.Logger;
 import frc.robot.Robot.RobotState;
-import frc.robot.commands.FeedBalls;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.ResetGyro;
+import frc.robot.commands.ballpath.FeedBalls;
 import frc.robot.commands.swerve.ClimberSwerve;
 import frc.robot.commands.swerve.LLAim;
 import frc.robot.commands.swerve.TurnToAngle;
@@ -35,10 +35,6 @@ public class Gamepads {
 		CommandScheduler.getInstance().clearButtons();
 		driverConfigured = false;
 		operatorConfigured = false;
-		// driver = new SpectrumXboxController(0, .15, .15); //Set these up to be
-		// configured from Dashboard
-		// operator = new SpectrumXboxController(1, .06, .05); //Set these up to be
-		// configured from Dashboard
 		configureDriver();
 		configureOperator();
 		if (!driverConfigured) {

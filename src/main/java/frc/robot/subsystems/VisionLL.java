@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.LimeLight;
 import frc.lib.drivers.LimeLightControlModes.LedMode;
-import frc.lib.util.Logger;
 import frc.robot.Robot;
 import frc.robot.Robot.RobotState;
 import frc.robot.telemetry.Log;

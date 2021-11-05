@@ -1,25 +1,18 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+//Created by Spectrum3847
 
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.StatusFrame;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
-import frc.robot.Constants;
+import frc.lib.util.TalonFXSetup;
+import frc.robot.Constants.TowerConstants;
+import frc.robot.constants.TowerFalconConfig;
 import frc.robot.telemetry.Log;
 
 
@@ -48,11 +41,10 @@ public class Tower extends SubsystemBase {
     iZone = (int) SpectrumPreferences.getInstance().getNumber("Tower I-Zone", 150);
 
     
-    motorFront = new WPI_TalonFX(Constants.TowerConstants.kTowerMotorFront);
-    motorFront.setInverted(true);
-    SupplyCurrentLimitConfiguration supplyCurrentLimit = new SupplyCurrentLimitConfiguration(true, 60, 65, 0.5);
-    motorFront.configSupplyCurrentLimit(supplyCurrentLimit);
-    motorFront.setNeutralMode(NeutralMode.Coast);
+    motorFront = new WPI_TalonFX(TowerConstants.kTowerMotorFront);
+    TalonFXSetup.defaultSetup(motorFront, TowerFalconConfig.kInverted, 60);
+    motorFront.configSupplyCurrentLimit(TowerFalconConfig.supplyLimit);
+    motorFront.setNeutralMode(TowerFalconConfig.kNeutralMode);
 
     motorFront.config_kP(0, kP);
     motorFront.config_kI(0, kI);   
@@ -63,21 +55,11 @@ public class Tower extends SubsystemBase {
 
     motorFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
-    motorRear = new WPI_TalonFX(Constants.TowerConstants.kTowerMotorRear);
-    motorRear.setInverted(false);   //should be inverse of motorFront
-    motorRear.configSupplyCurrentLimit(supplyCurrentLimit);
-    motorRear.setNeutralMode(NeutralMode.Coast);
+    motorRear = new WPI_TalonFX(TowerConstants.kTowerMotorRear);
+    TalonFXSetup.defaultSetup(motorRear, !TowerFalconConfig.kInverted, 60); //should be inverse of motorFront
+    motorRear.configSupplyCurrentLimit(TowerFalconConfig.supplyLimit);
+    motorRear.setNeutralMode(TowerFalconConfig.kNeutralMode);
     motorRear.follow(motorFront);
-
-    int time = 255;
-    //motorRear.setStatusFramePeriod(StatusFrame.Status_1_General, 10);
-    motorRear.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, time);
-    motorRear.setStatusFramePeriod(StatusFrame.Status_6_Misc, time);
-    motorRear.setStatusFramePeriod(StatusFrame.Status_7_CommStatus, time);
-    motorRear.setStatusFramePeriod(StatusFrame.Status_9_MotProfBuffer, time);
-    motorRear.setStatusFramePeriod(StatusFrame.Status_10_MotionMagic, time);
-    motorRear.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, time);
-    motorRear.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, time);
 
     SpectrumPreferences.getInstance().getNumber("Tower Setpoint", 1000);
 

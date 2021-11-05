@@ -6,11 +6,10 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 
 import java.util.Map;
 
-import frc.robot.CTREConfigs;
 import frc.robot.Robot;
+import frc.robot.subsystems.Swerve.SwerveCTREConfigs;
 import frc.robot.telemetry.Log;
 import frc.lib.telemetry.FalconConfigLayout;
-import frc.lib.util.Logger;
 
 // The Shuffleboard Main tab.
 public class SwerveTelemetry {
@@ -47,7 +46,7 @@ public class SwerveTelemetry {
         moduleLayout("Mod 2", 1, m_tab).withPosition(3, 0);
         moduleLayout("Mod 4", 1, m_tab).withPosition(4, 0);
         
-        driveMod0 = new FalconConfigLayout("Drive Mod 0", m_tab, Robot.swerve.mSwerveMods[0].mDriveMotor, CTREConfigs.swerveDriveFXConfig);
+        driveMod0 = new FalconConfigLayout("Drive Mod 0", m_tab, Robot.swerve.mSwerveMods[0].mDriveMotor, 5, 0);
         driveMod0.initialize();
     }
 

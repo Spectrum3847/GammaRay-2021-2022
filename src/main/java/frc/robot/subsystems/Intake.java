@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.SpectrumSolenoid;
@@ -29,7 +28,7 @@ public class Intake extends SubsystemBase{
   public Intake() {  
     setName(name);
     motor = new WPI_TalonFX(Constants.IntakeConstants.kIntakeMotor);
-    TalonFXSetup.defaultSetup(motor);
+    TalonFXSetup.defaultSetup(motor, false, 40);
     
     solDown = new SpectrumSolenoid(Constants.IntakeConstants.kIntakeDown);
 

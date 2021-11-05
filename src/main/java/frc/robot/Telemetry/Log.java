@@ -7,7 +7,7 @@ import frc.lib.util.Logger;
 //This class adds robot specfic flags to Logger class
 public class Log extends Logger{
   private static int FMS_LOG_LEVEL = high3;        //Log level when FMS attached
-  private static int PRACTICE_LOG_LEVEL = normal2; //Log level any other time
+  private static int PRACTICE_LOG_LEVEL = low1; //Log level any other time
 
   // Add Debug flags
   // You can have a flag for each subsystem, etc

@@ -1,4 +1,4 @@
-package frc.robot.telemetry.shuffleboard;
+package frc.lib.telemetry;
 
 import java.util.Map;
 

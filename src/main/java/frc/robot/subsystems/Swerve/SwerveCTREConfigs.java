@@ -1,7 +1,8 @@
+//Created by Spectrum3847
 //Based on Code from Team364 - BaseFalconSwerve
 //https://github.com/Team364/BaseFalconSwerve/tree/338c0278cb63714a617f1601a6b9648c64ee78d1
 
-package frc.robot;
+package frc.robot.subsystems.Swerve;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
@@ -9,17 +10,16 @@ import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorTimeBase;
-
 import frc.robot.Constants.SwerveConstants;
 
-public final class CTREConfigs {
+public final class SwerveCTREConfigs {
     public static TalonFXConfiguration swerveAngleFXConfig;
     public static TalonFXConfiguration swerveDriveFXConfig;
     public static CANCoderConfiguration swerveCanCoderConfig;
 
-    private static final CTREConfigs instance = new CTREConfigs();
+    private static final SwerveCTREConfigs instance = new SwerveCTREConfigs();
 
-    private CTREConfigs(){
+    private SwerveCTREConfigs(){
         swerveAngleFXConfig = new TalonFXConfiguration();
         swerveDriveFXConfig = new TalonFXConfiguration();
         swerveCanCoderConfig = new CANCoderConfiguration();
@@ -63,7 +63,7 @@ public final class CTREConfigs {
         swerveCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
     }
 
-    public static CTREConfigs getConfigs(){
+    public static SwerveCTREConfigs getConfigs(){
         return instance;
     }
 }

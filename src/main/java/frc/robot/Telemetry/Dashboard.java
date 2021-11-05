@@ -62,20 +62,4 @@ public class Dashboard {
 			updatePutSlow();
 		}
 	}
-
-    //Old way we used to update dashboard can be deleted.
-    /*public static void updateDashboard() {
-        double time = Timer.getFPGATimestamp();
-    	if (ENABLE_DASHBOARD) {
-            if ((time - shortOldTime) > SHORT_DELAY) {
-                shortOldTime = time;
-                updatePutShort();
-            }
-            if ((time - longOldTime) > LONG_DELAY) {
-                //Thing that should be updated every LONG_DELAY
-                longOldTime = time;
-                updatePutLong();
-            }
-        }
-    }*/
 }

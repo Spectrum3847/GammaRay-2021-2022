@@ -7,6 +7,7 @@ import frc.robot.telemetry.shuffleboard.GamepadsTelemetry;
 import frc.robot.telemetry.shuffleboard.IntakeTelemetry;
 import frc.robot.telemetry.shuffleboard.MainTelemetry;
 import frc.robot.telemetry.shuffleboard.SwerveTelemetry;
+import frc.robot.telemetry.shuffleboard.TowerTelemetry;
 
 // Class that wraps all of the interaction with the Shuffleboard
 
@@ -17,13 +18,14 @@ import frc.robot.telemetry.shuffleboard.SwerveTelemetry;
 // The ShuffleboardTabs class knows about the subsystems, commands, etc. but generally not vice versa.
 public class ShuffleboardTabs {
 
-    private double _hearBeatPeriod = 1;     //How fast we should run the update methods, most values are set by suppliers so they update quickly
+    private double _heartBeatPeriod = 1;     //How fast we should run the update methods, most values are set by suppliers so they update quickly
 
     // Tabs
     private MainTelemetry m_mainTelemetry;
     private SwerveTelemetry m_swerveTelemetry;
     public IntakeTelemetry m_IntakeTelemetry;
     public GamepadsTelemetry m_GamepadsTelemetry;
+    private TowerTelemetry m_towerTelemetry;
 
     public ShuffleboardTabs() {
         printLow("Constructing ShuffleboardTabs...");
@@ -32,6 +34,7 @@ public class ShuffleboardTabs {
         m_swerveTelemetry = new SwerveTelemetry();
         m_IntakeTelemetry = new IntakeTelemetry(); 
         m_GamepadsTelemetry = new GamepadsTelemetry();
+        m_towerTelemetry = new TowerTelemetry();
     }
 
     public void initialize() {
@@ -41,8 +44,9 @@ public class ShuffleboardTabs {
         m_IntakeTelemetry.initialize();
         m_mainTelemetry.initialize();
         m_GamepadsTelemetry.initialize();
+        m_towerTelemetry.initialize();
         
-        _hearBeat.startPeriodic(_hearBeatPeriod);
+        _heartBeat.startPeriodic(_heartBeatPeriod);
     }
 
     //Update values from Shuffleboard, this is run at the _heartbeatperiod
@@ -52,6 +56,7 @@ public class ShuffleboardTabs {
             m_swerveTelemetry.update();
             m_IntakeTelemetry.update();
             m_GamepadsTelemetry.update();
+            m_towerTelemetry.update();
     }
 
     public static void printLow(String msg) {
@@ -77,5 +82,5 @@ public class ShuffleboardTabs {
                 update();
         }
     }
-    Notifier _hearBeat = new Notifier(new PeriodicRunnable());
+    Notifier _heartBeat = new Notifier(new PeriodicRunnable());
 }

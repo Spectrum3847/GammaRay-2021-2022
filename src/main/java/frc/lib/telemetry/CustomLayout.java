@@ -4,6 +4,7 @@ import java.util.Map;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
@@ -21,7 +22,6 @@ public class CustomLayout {
 
     //---------------------//
     // initializeViewable  //
-    // Create all View Widgets, ones you can't edit, created after subsystem instances are made
     public void initialize(){
 
     }
@@ -38,22 +38,41 @@ public class CustomLayout {
         return widget.getEntry();
     }
 
+    protected NetworkTableEntry quickAddPersistentWidget(String name, boolean defaultValue, int column, int row){
+        SimpleWidget widget = layout.addPersistent(name, defaultValue);
+        widget.withPosition(column, row);
+        return widget.getEntry();
+    }
+
     protected NetworkTableEntry quickAddWidget(String name, double defaultValue, int column, int row){
         SimpleWidget widget = layout.add(name, defaultValue);
         widget.withPosition(column, row);
         return widget.getEntry();
     }
 
+    protected NetworkTableEntry quickAddWidget(String name, boolean defaultValue, int column, int row){
+        SimpleWidget widget = layout.add(name, defaultValue);
+        widget.withPosition(column, row);
+        return widget.getEntry();
+    }
+
+    protected NetworkTableEntry addPersistentWidget(int column, int row){
+        SimpleWidget widget = layout.add("Persistent Values", true);
+        widget.withPosition(column, row);
+        widget.withWidget(BuiltInWidgets.kToggleSwitch);
+        return widget.getEntry();
+    }
+
     protected void setColumns(int cols){
-        layout.withProperties(Map.of("Number of columns", cols));
+        layout.withProperties(Map.of("Number of columns", cols, "Label position", "TOP"));
     }
 
     protected void setRows(int rows){
-        layout.withProperties(Map.of("Number of rows", rows));
+        layout.withProperties(Map.of("Number of rows", rows, "Label position", "TOP"));
     }
 
     protected void setColumnsAndRows(int cols, int rows){
-        layout.withProperties(Map.of("Number of columns", cols, "Number of rows", rows));
+        layout.withProperties(Map.of("Number of columns", cols, "Number of rows", rows, "Label position", "TOP"));
     }
 
     protected void setSize(int width, int height){
