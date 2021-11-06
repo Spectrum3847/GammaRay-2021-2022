@@ -1,0 +1,20 @@
+name: checkstyle
+
+on: [push, pull_request]
+
+jobs:
+  java-checkstyle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Run Java Checkstyle
+        uses: Justintime50/java-checkstyle-action@v1
+        with:
+          # The directory to run Checkstyle recursively on.
+          # Default is the root of your project.
+          directory: /src/main/java/frc
+
+          # The name of the style suite to be used, either 'sun' or 'google'.
+          # Default is shown.
+          style_suite: sun
