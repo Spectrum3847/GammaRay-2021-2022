@@ -24,6 +24,7 @@ hs_err_pid*
 
 # Build Files
 build/*
+*/cache.properties
 
 #lock files
 *.lock
