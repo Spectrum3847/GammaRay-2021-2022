@@ -46,7 +46,7 @@ public class Swerve extends SubsystemBase {
 
     public Swerve() {
         setName(name);
-        gyro = new PigeonIMU(CanIDs.pigeonID);
+        gyro = new PigeonIMU(CanIDs.PIGEON_ID);
         gyro.configFactoryDefault();
         zeroGyro();
         
@@ -161,7 +161,7 @@ public class Swerve extends SubsystemBase {
     public Rotation2d getYaw() {
         double[] ypr = new double[3];
         gyro.getYawPitchRoll(ypr);
-        return (SwerveConstants.invertGyro) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
+        return (SwerveConstants.isInvertGyro) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
     }
 
     public double getDegrees() {

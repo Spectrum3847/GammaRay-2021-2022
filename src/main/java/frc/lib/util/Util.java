@@ -59,7 +59,7 @@ public class Util {
 	 * Should return true if robot is disabled and voltage is less than 12
 	 ******************************************************************************/
 	public static boolean changeBattery () {
-		return (Robot.s_robot_state == Robot.RobotState.DISABLED && RobotController.getInputVoltage() < Constants.minBatteryVoltage);
+		return (Robot.s_robot_state == Robot.RobotState.DISABLED && RobotController.getInputVoltage() < Constants.MIN_BATTERY_VOLTAGE);
 	}
 
     public static boolean closeTo(double a, double b, double epsilon) {

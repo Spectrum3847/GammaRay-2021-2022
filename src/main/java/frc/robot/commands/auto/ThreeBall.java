@@ -7,8 +7,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 import frc.robot.commands.ballpath.FeedBalls;
-import frc.robot.commands.ballpath.ShooterVel;
+import frc.robot.commands.ballpath.runLauncherRPMwithTower;
 import frc.robot.commands.swerve.SwerveDrive;
+import frc.robot.constants.LauncherConstants;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,8 +21,8 @@ public class ThreeBall extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ParallelCommandGroup(
-        new RunCommand(() -> Robot.launcher.setHood(Robot.launcher.intitationLineShot)),
-        new ShooterVel(4500),  //Shooter spinup
+        new RunCommand(() -> Robot.launcher.setHood(LauncherConstants.INTIANTION_LINE_SHOT)),
+        new runLauncherRPMwithTower(4500),  //Shooter spinup
         new SequentialCommandGroup(
           new WaitCommand(1),
           new FeedBalls().withTimeout(4).alongWith(new RunCommand(() -> Robot.intake.setManualOutput(0.3), Robot.intake)) //tower feed

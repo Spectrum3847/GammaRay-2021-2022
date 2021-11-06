@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Logger;
 import frc.lib.util.SpectrumPreferences;
+import frc.robot.constants.LauncherConstants;
 import frc.robot.constants.Constants.CanIDs;
 import frc.robot.constants.Constants.PWMPorts;
 import frc.robot.telemetry.Log;
@@ -23,12 +24,9 @@ public class Launcher extends SubsystemBase {
   public final WPI_TalonFX motorRight;
   public final Servo leftHood;
   public final Servo rightHood;
-  public final double closeShoot = 0;
-  public final double intitationLineShot = 0.6;
-  public final double farShot = 1.0;
 
-  private double kP, kI, kD, kF;
-  private int iZone;
+  private double kP_, kI_, kD_, kF_;
+  private int iZone_;
 
   /**
    * Creates a new Intake.
@@ -37,11 +35,11 @@ public class Launcher extends SubsystemBase {
     setName(name);
     //Pid
 
-    kP = SpectrumPreferences.getNumber("Launcher kP", 0.0465);
-    kI = SpectrumPreferences.getNumber("Launcher kI", 0.0005);
-    kD = SpectrumPreferences.getNumber("Launcher kD", 0.0);
-    kF = SpectrumPreferences.getNumber("Launcher kF", 0.048);
-    iZone = (int) SpectrumPreferences.getNumber("Launcher I-Zone", 150);
+    kP_ = SpectrumPreferences.getInstance().getNumber("Launcher kP", 0.0465);
+    kI_ = SpectrumPreferences.getInstance().getNumber("Launcher kI", 0.0005);
+    kD_ = SpectrumPreferences.getInstance().getNumber("Launcher kD", 0.0);
+    kF_ = SpectrumPreferences.getInstance().getNumber("Launcher kF", 0.048);
+    iZone_ = (int) SpectrumPreferences.getInstance().getNumber("Launcher I-Zone", 150);
 
     
     motorLeft = new WPI_TalonFX(CanIDs.kLauncherMotorLeft);
@@ -50,11 +48,11 @@ public class Launcher extends SubsystemBase {
     motorLeft.configSupplyCurrentLimit(supplyCurrentLimit);
     motorLeft.setNeutralMode(NeutralMode.Coast);
 
-    motorLeft.config_kP(0, kP);
-    motorLeft.config_kI(0, kI);   
-    motorLeft.config_kD(0, kD);  
-    motorLeft.config_kF(0, kF);  
-    motorLeft.config_IntegralZone(0, iZone);
+    motorLeft.config_kP(0, kP_);
+    motorLeft.config_kI(0, kI_);   
+    motorLeft.config_kD(0, kD_);  
+    motorLeft.config_kF(0, kF_);  
+    motorLeft.config_IntegralZone(0, iZone_);
     //motorLeft.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 10);
 
     motorLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -72,7 +70,7 @@ public class Launcher extends SubsystemBase {
     rightHood = new Servo(PWMPorts.kHoodServoRight);
     leftHood.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
     rightHood.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
-    this.setHood(intitationLineShot);
+    this.setHood(LauncherConstants.INTIANTION_LINE_SHOT);
 
     this.setDefaultCommand(new RunCommand(() -> stop() , this));
   }

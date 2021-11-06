@@ -2,12 +2,12 @@
 package frc.robot.constants;
 
 public final class Constants {
-    public static int CANconfigTimeOut = 0;
-    public static final int minBatteryVoltage = 12;
+    public static int CAN_CONFIG_TIMEOUT = 0;
+    public static final int MIN_BATTERY_VOLTAGE = 12;
 
     public static final class CanIDs{
 
-        public static final int pigeonID = 0;
+        public static final int PIGEON_ID = 0;
 
         public static final int driveMotor0 = 1;
         public static final int angleMotor0 = 2;

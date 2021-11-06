@@ -25,8 +25,6 @@ public class Tower extends SubsystemBase {
   private double kP, kI, kD, kF;
   private int iZone;
 
-  public final double towerRPM = 1700;
-
   /**
    * Creates a new Intake.
    */

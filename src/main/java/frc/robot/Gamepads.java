@@ -12,70 +12,69 @@ import frc.robot.commands.ballpath.BallPath;
 import frc.robot.commands.swerve.ClimberSwerve;
 import frc.robot.commands.swerve.LLAim;
 import frc.robot.commands.swerve.TurnToAngle;
+import frc.robot.constants.GamepadConstants;
 import frc.robot.telemetry.Log;
 
 public class Gamepads {
-	// Create Joysticks first so they can be used in defaultCommands
-	public static XboxGamepad driver = new XboxGamepad(0, .15, .15);
-	public static XboxGamepad operator = new XboxGamepad(1, .06, .05);
-	public static boolean driverConfigured = false;
-	public static boolean operatorConfigured = false;
 	public static String name = Log._controls;
+	// Create Joysticks first so they can be used in defaultCommands
+	public static XboxGamepad driver = GamepadConstants.setDefaults(new XboxGamepad(0), GamepadConstants.driverDefaultValues);
+	public static XboxGamepad operator = GamepadConstants.setDefaults(new XboxGamepad(1), GamepadConstants.operatorDefaultValues);
+	public static boolean isDriverBound = false;
+	public static boolean isOperatorBound = false;
 
 	// Configure all the controllers
-	public static void configure() {
-		configureDriver();
-		configureOperator();
+	public static void bindGamepads() {
+		bindDriver();
+		bindOperator();
 	}
 
-	public static void resetConfig() {
+	public static void resetBindings() {
 		CommandScheduler.getInstance().clearButtons();
-		driverConfigured = false;
-		operatorConfigured = false;
-		configureDriver();
-		configureOperator();
-		if (!driverConfigured) {
-			Logger.println("##### Driver Controller Not Connected #####");
+		isDriverBound = false;
+		isOperatorBound = false;
+		bindDriver();
+		bindOperator();
+		if (!isDriverBound) {
+			printCritical("##### Driver Controller Not Connected #####");
 		}
 
-		if (!operatorConfigured) {
-			Logger.println("***** Operator Controller Not Connected *****");
+		if (!isOperatorBound) {
+			printCritical("***** Operator Controller Not Connected *****");
 		}
 	}
 
-	// Configure the driver controller
-	public static void configureDriver() {
+	// Bind the driver controller buttons
+	public static void bindDriver() {
 		// Detect whether the xbox controller has been plugged in after start-up
-		if (!driverConfigured) {
-			boolean isConnected = driver.isConnected();
-			if (!isConnected)
+		if (!isDriverBound) {
+			if (!driver.isConnected())
 				return;
 
-			// Configure button bindings
+			// button bindings
 			if (Robot.getState() == RobotState.TEST) {
 				driverTestBindings();
 			} else {
 				driverBindings();
 			}
-			driverConfigured = true;
+			isDriverBound = true;
 		}
 	}
 
-	// Configure the operator controller
-	public static void configureOperator() {
+	// Bind the operator controller buttons
+	public static void bindOperator() {
 		// Detect whether the xbox controller has been plugged in after start-up
-		if (!operatorConfigured) {
-			boolean isConnected = operator.isConnected();
-			if (!isConnected)
+		if (!isOperatorBound) {
+			if (!operator.isConnected())
 				return;
 
-			// Configure button bindings
+			// button bindings
 			if (Robot.getState() == RobotState.TEST) {
 				operatorTestBindings();
 			} else {
 				operatorBindings();
 			}
-			operatorConfigured = true;
+			isOperatorBound = true;
 		}
 	}
 
@@ -138,23 +137,19 @@ public class Gamepads {
 
 	}
 
-	public static double getClimberJoystick(){
-		return operator.leftStick.getY();
-	}
-
-	public static void printDebug(String msg) {
+	public static void printLow(String msg) {
 		Logger.println(msg, name, Logger.low1);
 	}
 
-	public static void printInfo(String msg) {
+	public static void printNormal(String msg) {
 		Logger.println(msg, name, Logger.normal2);
 	}
 
-	public static void printWarning(String msg) {
+	public static void printHigh(String msg) {
 		Logger.println(msg, name, Logger.high3);
 	}
 
-	public static void printError(String msg) {
+	public static void printCritical(String msg) {
 		Logger.println(msg, name, Logger.critical4);
 	}
 }

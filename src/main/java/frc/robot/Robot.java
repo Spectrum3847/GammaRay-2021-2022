@@ -2,6 +2,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -40,12 +41,12 @@ public class Robot extends TimedRobot {
     public static final Climber climber = new Climber();
     public static final VisionLL visionLL = new VisionLL();
     public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    public static PowerDistribution pdp = new PowerDistribution(0, ModuleType.kCTRE);
-    public static SpectrumPreferences prefs = SpectrumPreferences.getInstance();
+    public static final PowerDistribution pdp = new PowerDistribution(0, ModuleType.kCTRE);
+    public static final SpectrumPreferences prefs = SpectrumPreferences.getInstance();
     public static final ShuffleboardTabs shuffleboardTabs = new ShuffleboardTabs();
 
     // AutonCommand
-    private Command m_autonomousCommand;
+    private Command autonomousCommand_;
 
     /**
      * Robot State Tracking Setup
@@ -64,6 +65,11 @@ public class Robot extends TimedRobot {
         s_robot_state = state;
     }
 
+    // Easier to get from Robot than DriverStation, combine with isReal, isSimulation, etc.
+    public static boolean isFMS(){
+        return DriverStation.isFMSAttached();
+    }
+
     /**
      * This function is run when the robot is first started up and should be used
      * for any initialization code.
@@ -73,7 +79,7 @@ public class Robot extends TimedRobot {
         printNormal("Start robotInit()");
         Dashboard.intializeDashboard();
         shuffleboardTabs.initialize();
-        Gamepads.resetConfig(); // Reset Gamepad Configs
+        Gamepads.resetBindings(); // Reset Gamepad Configs
         Log.initLog(); // Config the Debugger based on FMS state
         compressor.start();
         visionLL.forwardLimeLightPorts();
@@ -101,7 +107,7 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().run();
 
         // Ensure the controllers are always configured
-        Gamepads.configure();
+        Gamepads.bindGamepads();
     }
 
     /** This function is called once each time the robot enters Disabled mode. */
@@ -110,11 +116,10 @@ public class Robot extends TimedRobot {
         setState(RobotState.DISABLED);
         printNormal("Start disabledInit()");
         Log.initLog(); // Config the Debugger based on FMS state
-        Gamepads.resetConfig();
+        Gamepads.resetBindings();
         ; // Reset Gamepad Configs
         CommandScheduler.getInstance().cancelAll(); // Disable any currently running commands
-        LiveWindow.setEnabled(false); // Disable Live Window we don't need that data being sent
-        LiveWindow.disableAllTelemetry();
+        disableLiveWindow();
         printNormal("End disabledInit()");
     }
 
@@ -132,13 +137,12 @@ public class Robot extends TimedRobot {
         printNormal("Start autonomousInit()");
         Log.initLog(); // Config the Debugger based on FMS state
         CommandScheduler.getInstance().cancelAll(); // Disable any currently running commands
-        LiveWindow.setEnabled(false); // Disable Live Window we don't need that data being sent
-        LiveWindow.disableAllTelemetry();
+        disableLiveWindow();
 
         // schedule the autonomous command (example)
-        m_autonomousCommand = AutonSetup.getAutonomousCommand();
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.schedule();
+        autonomousCommand_ = AutonSetup.getAutonomousCommand();
+        if (autonomousCommand_ != null) {
+            autonomousCommand_.schedule();
         }
 
         printNormal("End autonomousInit()");
@@ -155,10 +159,9 @@ public class Robot extends TimedRobot {
         printNormal("Start teleopInit()");
         CommandScheduler.getInstance().cancelAll(); // Disable any currently running commands
         Log.initLog(); // Config the Debugger based on FMS state
-        Gamepads.resetConfig();
+        Gamepads.resetBindings();
         ; // Reset Gamepad Configs
-        LiveWindow.setEnabled(false); // Disable Live Window we don't need that data being sent
-        LiveWindow.disableAllTelemetry();
+        disableLiveWindow();
         printNormal("End teleopInit()");
     }
 
@@ -172,7 +175,7 @@ public class Robot extends TimedRobot {
         setState(RobotState.TEST);
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
-        Gamepads.resetConfig();
+        Gamepads.resetBindings();
         ; // Reset Gamepad Configs
         Log.initLog(); // Config the Debugger based on FMS state
     }
@@ -190,6 +193,10 @@ public class Robot extends TimedRobot {
         PhysicsSim.getInstance().run();
     }
 
+    public void disableLiveWindow(){
+        LiveWindow.setEnabled(false);
+        LiveWindow.disableAllTelemetry();
+    }
     // ---------------//
     // Print Methods //
     // ---------------//

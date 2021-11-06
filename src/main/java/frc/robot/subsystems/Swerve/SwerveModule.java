@@ -76,7 +76,7 @@ public class SwerveModule {
     private void configAngleMotor(){
         mAngleMotor.configFactoryDefault();
         mAngleMotor.configAllSettings(SwerveCTREConfigs.swerveAngleFXConfig);
-        mAngleMotor.setInverted(SwerveConstants.angleMotorInvert);
+        mAngleMotor.setInverted(SwerveConstants.isAngleMotorInvert);
         mAngleMotor.setNeutralMode(SwerveConstants.angleNeutralMode);
         resetToAbsolute();
     }
@@ -84,7 +84,7 @@ public class SwerveModule {
     private void configDriveMotor(){        
         mDriveMotor.configFactoryDefault();
         mDriveMotor.configAllSettings(SwerveCTREConfigs.swerveDriveFXConfig);
-        mDriveMotor.setInverted(SwerveConstants.driveMotorInvert);
+        mDriveMotor.setInverted(SwerveConstants.isDriveMotorInvert);
         mDriveMotor.setNeutralMode(SwerveConstants.driveNeutralMode);
         mDriveMotor.setSelectedSensorPosition(0);
     }

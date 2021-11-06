@@ -8,14 +8,13 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.SpectrumSolenoid;
 import frc.lib.util.TalonFXSetup;
+import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.Constants.CanIDs;
 import frc.robot.constants.Constants.SolenoidPorts;
 import frc.robot.telemetry.Log;
 
 public class Intake extends SubsystemBase{
   public static final String name = Log._intake;
-
-  public final double intakeSpeed = 0.75;
 
   public final WPI_TalonFX motor;
   public final solenoid sol;
@@ -41,7 +40,7 @@ public class Intake extends SubsystemBase{
   }
 
   public void intakeOn(){
-    setManualOutput(intakeSpeed);
+    setManualOutput(IntakeConstants.DEFAULT_INTAKE_SPEED);
   }
 
   public void stopMotor(){

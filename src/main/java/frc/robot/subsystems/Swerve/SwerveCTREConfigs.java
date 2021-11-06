@@ -27,7 +27,7 @@ public final class SwerveCTREConfigs {
 
         /* Swerve Angle Motor Configurations */
         SupplyCurrentLimitConfiguration angleSupplyLimit = new SupplyCurrentLimitConfiguration(
-            SwerveConstants.angleEnableCurrentLimit, 
+            SwerveConstants.isAngleEnableCurrentLimit, 
             SwerveConstants.angleContinuousCurrentLimit, 
             SwerveConstants.anglePeakCurrentLimit, 
             SwerveConstants.anglePeakCurrentDuration);
@@ -42,7 +42,7 @@ public final class SwerveCTREConfigs {
 
         /* Swerve Drive Motor Configuration */
         SupplyCurrentLimitConfiguration driveSupplyLimit = new SupplyCurrentLimitConfiguration(
-            SwerveConstants.driveEnableCurrentLimit, 
+            SwerveConstants.isDriveEnableCurrentLimit, 
             SwerveConstants.driveContinuousCurrentLimit, 
             SwerveConstants.drivePeakCurrentLimit, 
             SwerveConstants.drivePeakCurrentDuration);
@@ -59,7 +59,7 @@ public final class SwerveCTREConfigs {
         
         /* Swerve CANCoder Configuration */
         swerveCanCoderConfig.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
-        swerveCanCoderConfig.sensorDirection = SwerveConstants.canCoderInvert;
+        swerveCanCoderConfig.sensorDirection = SwerveConstants.isCanCoderInvert;
         swerveCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
         swerveCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
     }

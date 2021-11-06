@@ -10,7 +10,7 @@ import frc.lib.swerve.SwerveModuleConstants;
 import frc.robot.constants.Constants.CanIDs;
 
 public final class SwerveConstants {
-    public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
+    public static final boolean isInvertGyro = false; // Always ensure Gyro is CCW+ CW-
 
     /* Drivetrain Constants */
     public static final double trackWidth = Units.inchesToMeters(17.5);
@@ -34,12 +34,12 @@ public final class SwerveConstants {
     public static final int angleContinuousCurrentLimit = 25;
     public static final int anglePeakCurrentLimit = 40;
     public static final double anglePeakCurrentDuration = 0.1;
-    public static final boolean angleEnableCurrentLimit = true;
+    public static final boolean isAngleEnableCurrentLimit = true;
 
     public static final int driveContinuousCurrentLimit = 35;
     public static final int drivePeakCurrentLimit = 60;
     public static final double drivePeakCurrentDuration = 0.1;
-    public static final boolean driveEnableCurrentLimit = true;
+    public static final boolean isDriveEnableCurrentLimit = true;
 
     /* Angle Motor PID Values */
     public static final double angleKP = 0.6;
@@ -67,11 +67,11 @@ public final class SwerveConstants {
     public static final NeutralMode driveNeutralMode = NeutralMode.Brake;
 
     /* Motor Inverts */
-    public static final boolean driveMotorInvert = false;
-    public static final boolean angleMotorInvert = false;
+    public static final boolean isDriveMotorInvert = false;
+    public static final boolean isAngleMotorInvert = false;
 
     /* Angle Encoder Invert */
-    public static final boolean canCoderInvert = false;
+    public static final boolean isCanCoderInvert = false;
 
     /* Module Specific Constants */
     /* Front Left Module - Module 0 */

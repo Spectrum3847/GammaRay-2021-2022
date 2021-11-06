@@ -2,21 +2,22 @@ package frc.robot.commands.ballpath;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-public class ShooterVel extends CommandBase {
-  private double _rpm;
+import frc.robot.constants.TowerConstants;
+public class runLauncherRPMwithTower extends CommandBase {
+  private double rpm_;
 
   /** Creates a new launcherVel. */
-  public ShooterVel(double rpm) {
+  public runLauncherRPMwithTower(double rpm) {
     // Use addRequirements() here to declare subsystem dependencies.
-    _rpm = rpm;
+    rpm_ = rpm;
     addRequirements(Robot.launcher, Robot.tower);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.launcher.setRPM(_rpm);
-    Robot.tower.setRPM(Robot.tower.towerRPM);
+    Robot.launcher.setRPM(rpm_);
+    Robot.tower.setRPM(TowerConstants.TOWER_RPM);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
