@@ -1,8 +1,6 @@
 //Created by Spectrum3847
 package frc.lib.telemetry;
 
-import java.util.Map;
-
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 
