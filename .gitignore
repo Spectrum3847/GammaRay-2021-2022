@@ -24,6 +24,7 @@ hs_err_pid*
 
 # Build Files
 build/*
+.gradle/buildOutputCleanup/*
 
 #lock files
 *.lock

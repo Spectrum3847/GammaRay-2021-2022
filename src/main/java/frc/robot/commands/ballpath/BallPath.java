@@ -10,6 +10,10 @@ public class BallPath {
         return new FeedBalls().alongWith(runIntake(0.3));
     }
 
+    public static Command intakeBalls(){
+        return runIntake(Robot.intake.intakeSpeed).alongWith(intakeDown());
+    }
+
     //Deploy Intake
     public static Command intakeDown(){
         return new RunCommand(() -> Robot.intake.sol.down(), Robot.intake.sol);

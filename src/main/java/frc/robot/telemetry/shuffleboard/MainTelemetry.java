@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Timer;
 
 import java.util.Map;
 
-import frc.robot.Robot;
 import frc.robot.telemetry.Log;
 import frc.lib.util.Logger;
 

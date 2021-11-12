@@ -12,6 +12,7 @@ import frc.robot.Gamepads;
 import frc.robot.telemetry.Log;
 
 public class GamepadsTelemetry {
+
     //---------------------//
     // NetworkTableEntries //
     //---------------------//

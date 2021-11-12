@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.SpectrumSolenoid;
-import frc.lib.util.Logger;
 import frc.lib.util.TalonFXSetup;
 import frc.robot.constants.Constants.CanIDs;
 import frc.robot.constants.Constants.SolenoidPorts;
@@ -29,7 +28,7 @@ public class Intake extends SubsystemBase{
     TalonFXSetup.defaultSetup(motor, false, 40);
     sol = new solenoid();
 
-    this.setDefaultCommand(new RunCommand(() -> disableIntake(), this));
+    setDefaultCommand(new RunCommand(() -> stopMotor(), this));
   }
 
   @Override
@@ -46,30 +45,26 @@ public class Intake extends SubsystemBase{
   }
 
   public void stopMotor(){
-    motor.stopMotor();;
-  }
-
-  public void disableIntake(){
-    stopMotor();
+    motor.stopMotor();
   }
 
   public void dashboard() {
   }
 
-  public static void printDebug(String msg){
-    Logger.println(msg, name, Logger.low1);
+  public static void printLow(String msg){
+    Log.println(msg, name, Log.low1);
   }
   
   public static void printInfo(String msg){
-    Logger.println(msg, name, Logger.normal2);
+    Log.println(msg, name, Log.normal2);
   }
   
-  public static void printWarning(String msg) {
-    Logger.println(msg, name, Logger.high3);
+  public static void printHigh(String msg) {
+    Log.println(msg, name, Log.high3);
   }
 
-  public static void printError(String msg) {
-    Logger.println(msg, name, Logger.critical4);
+  public static void printCritical(String msg) {
+    Log.println(msg, name, Log.critical4);
   }
 
   public class solenoid extends SubsystemBase{
