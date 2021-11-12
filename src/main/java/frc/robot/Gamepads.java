@@ -138,6 +138,9 @@ public class Gamepads {
 	public static void operatorTestBindings() {
 
 	}
+	public static double getClimberJoystick(){
+		return operator.leftStick.getY();
+	}
 
 	public static void printDebug(String msg) {
 		Logger.println(msg, name, Logger.low1);
