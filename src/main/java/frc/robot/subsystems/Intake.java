@@ -45,7 +45,7 @@ public class Intake extends SubsystemBase{
   }
 
   public void stopMotor(){
-    motor.stopMotor();;
+    motor.stopMotor();
   }
 
   public void dashboard() {
