@@ -9,7 +9,6 @@ import frc.lib.util.Logger;
 import frc.robot.Robot.RobotState;
 import frc.robot.commands.ResetGyro;
 import frc.robot.commands.ballpath.BallPath;
-import frc.robot.commands.ballpath.IntakeBalls;
 import frc.robot.commands.swerve.ClimberSwerve;
 import frc.robot.commands.swerve.LLAim;
 import frc.robot.commands.swerve.TurnToAngle;
@@ -103,7 +102,7 @@ public class Gamepads {
 
 	public static void operatorBindings() {
 		// Intake
-		operator.leftTriggerButton.whileHeld(new IntakeBalls());
+		operator.leftTriggerButton.whileHeld(BallPath.intakeBalls());
 
 		// Indexer
 		operator.selectButton.whileHeld(BallPath.feed());
@@ -137,6 +136,10 @@ public class Gamepads {
 	// Configure the button bindings for the driver control in Test Mode
 	public static void operatorTestBindings() {
 
+	}
+
+	public static double getClimberJoystick(){
+		return operator.leftStick.getY();
 	}
 
 	public static void printDebug(String msg) {

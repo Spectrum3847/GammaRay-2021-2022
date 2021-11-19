@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Preferences;
 
 public class SpectrumPreferences {
 	private static SpectrumPreferences instance;
-	private boolean reset = false;
+	private static boolean reset = false;
 
 	private SpectrumPreferences() {
 	}
@@ -23,7 +23,7 @@ public class SpectrumPreferences {
 	    return instance;
 	  }
 
-	  private boolean checkForKey(String key){
+	  private static boolean checkForKey(String key){
 		  if (Preferences.containsKey(key) && reset == false)
 			  return true;
 		  else{
@@ -37,7 +37,7 @@ public class SpectrumPreferences {
 	   * @param value the value
 	   * @throws NullPointerException if value is null
 	   */
-	  public String addString(String key, String value) {
+	  public static String addString(String key, String value) {
 		if (!checkForKey(key)){
 			if (value == null) {
 				throw new NullPointerException("Value is null");
@@ -54,7 +54,7 @@ public class SpectrumPreferences {
 	   * @param key   the key
 	   * @param value the value
 	   */
-	  public boolean addBoolean(String key, boolean value) {
+	  public static boolean addBoolean(String key, boolean value) {
 		if (!checkForKey(key)){
 		    Preferences.setBoolean(key, value);
 		}
@@ -68,7 +68,7 @@ public class SpectrumPreferences {
 	   * @param key   the key
 	   * @param value the value
 	   */
-	  public double addNumber(String key, double value) {
+	  public static double addNumber(String key, double value) {
 		if (!checkForKey(key)){
 		    Preferences.setDouble(key, value);
 		}
@@ -84,7 +84,7 @@ public class SpectrumPreferences {
 	   * @param backup the value to return if none exists in the table
 	   * @return either the value in the table, or the backup
 	   */
-	  public String getString(String key, String backup) {
+	  public static String getString(String key, String backup) {
 		  return addString(key, backup);
 	  }
 	  
@@ -96,7 +96,7 @@ public class SpectrumPreferences {
 	   * @param backup the value to return if none exists in the table
 	   * @return either the value in the table, or the backup
 	   */
-	  public double getNumber(String key, double backup) {
+	  public static double getNumber(String key, double backup) {
 	    return addNumber(key, backup);
 	  }
 	  
@@ -108,7 +108,7 @@ public class SpectrumPreferences {
 	   * @param backup the value to return if none exists in the table
 	   * @return either the value in the table, or the backup
 	   */
-	  public boolean getBoolean(String key, boolean backup) {
+	  public static boolean getBoolean(String key, boolean backup) {
 	    return addBoolean(key, backup);
 	  }
 	  
@@ -117,7 +117,7 @@ public class SpectrumPreferences {
 	   *
 	   * @param key the key
 	   */
-	  public void remove(String key) {
+	  public static void remove(String key) {
 	    Preferences.remove(key);
 	  }
 	  
@@ -127,7 +127,7 @@ public class SpectrumPreferences {
 	   * @param key the key
 	   * @return if there is a value at the given key
 	   */
-	  public boolean containsKey(String key) {
+	  public static boolean containsKey(String key) {
 	    return Preferences.containsKey(key);
 	  }
 	  
@@ -135,7 +135,7 @@ public class SpectrumPreferences {
 	   * Gets the vector of keys.
 	   * @return a vector of the keys
 	   */
-	public Vector<String> getKeys() {
+	public static Vector<String> getKeys() {
 		  Vector<String> keys = new Vector<String>();
 		  keys = (Vector<String>) Preferences.getKeys();
 	    return keys;
