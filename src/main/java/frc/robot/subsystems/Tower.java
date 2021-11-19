@@ -34,11 +34,11 @@ public class Tower extends SubsystemBase {
     setName(name);
     //Pid
 
-    kP = SpectrumPreferences.getInstance().getNumber("Tower kP",0.0465);
-    kI = SpectrumPreferences.getInstance().getNumber("Tower kI",0.0005);
-    kD = SpectrumPreferences.getInstance().getNumber("Tower kD",0.0);
-    kF = SpectrumPreferences.getInstance().getNumber("Tower kF",0.048);
-    iZone = (int) SpectrumPreferences.getInstance().getNumber("Tower I-Zone", 150);
+    kP = SpectrumPreferences.getNumber("Tower kP",0.0465);
+    kI = SpectrumPreferences.getNumber("Tower kI",0.0005);
+    kD = SpectrumPreferences.getNumber("Tower kD",0.0);
+    kF = SpectrumPreferences.getNumber("Tower kF",0.048);
+    iZone = (int) SpectrumPreferences.getNumber("Tower I-Zone", 150);
 
     
     motorFront = new WPI_TalonFX(CanIDs.kTowerMotorFront);
@@ -61,7 +61,7 @@ public class Tower extends SubsystemBase {
     motorRear.setNeutralMode(TowerFalconConfig.kNeutralMode);
     motorRear.follow(motorFront);
 
-    SpectrumPreferences.getInstance().getNumber("Tower Setpoint", 1000);
+    SpectrumPreferences.getNumber("Tower Setpoint", 1000);
 
     //Set Dafault Command to be driven by the operator left stick and divide by 1.75 to reduce speed
     this.setDefaultCommand(new RunCommand(() -> stop() , this));
@@ -80,7 +80,7 @@ public class Tower extends SubsystemBase {
   }
 
   public void DashboardVelocity(){
-    double wheelRpm = SpectrumPreferences.getInstance().getNumber("Tower Setpoint", 1000);
+    double wheelRpm = SpectrumPreferences.getNumber("Tower Setpoint", 1000);
     double motorVelocity = (wheelRpm * 30 / 8);
     motorFront.set(ControlMode.Velocity, motorVelocity);
   }
