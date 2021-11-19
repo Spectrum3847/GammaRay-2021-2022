@@ -37,11 +37,11 @@ public class Launcher extends SubsystemBase {
     setName(name);
     //Pid
 
-    kP = SpectrumPreferences.getInstance().getNumber("Launcher kP", 0.0465);
-    kI = SpectrumPreferences.getInstance().getNumber("Launcher kI", 0.0005);
-    kD = SpectrumPreferences.getInstance().getNumber("Launcher kD", 0.0);
-    kF = SpectrumPreferences.getInstance().getNumber("Launcher kF", 0.048);
-    iZone = (int) SpectrumPreferences.getInstance().getNumber("Launcher I-Zone", 150);
+    kP = SpectrumPreferences.getNumber("Launcher kP", 0.0465);
+    kI = SpectrumPreferences.getNumber("Launcher kI", 0.0005);
+    kD = SpectrumPreferences.getNumber("Launcher kD", 0.0);
+    kF = SpectrumPreferences.getNumber("Launcher kF", 0.048);
+    iZone = (int) SpectrumPreferences.getNumber("Launcher I-Zone", 150);
 
     
     motorLeft = new WPI_TalonFX(CanIDs.kLauncherMotorLeft);
@@ -65,7 +65,7 @@ public class Launcher extends SubsystemBase {
     motorRight.follow(motorLeft);
     motorRight.setNeutralMode(NeutralMode.Coast);
 
-    SpectrumPreferences.getInstance().getNumber("Launcher Setpoint", 1000);
+    SpectrumPreferences.getNumber("Launcher Setpoint", 1000);
 
 
     leftHood = new Servo(PWMPorts.kHoodServoLeft);
@@ -95,7 +95,7 @@ public class Launcher extends SubsystemBase {
     //launcher belt is 42 to 24
     //60000 milisecs in 1 min
     //RPM to U/100ms is rotations*4096 / 60000ms
-    double wheelRpm = SpectrumPreferences.getInstance().getNumber("Launcher Setpoint", 1000);
+    double wheelRpm = SpectrumPreferences.getNumber("Launcher Setpoint", 1000);
     double motorVelocity = (wheelRpm / 600 * 2048) / 1.75;
     motorLeft.set(ControlMode.Velocity, motorVelocity);
   }

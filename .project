@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>GammaRay-2021-2022</name>
-	<comment>Project GammaRay-2021-2022 created by Buildship.</comment>
+	<name>GammaRay-2021-2022-Imported</name>
+	<comment>Project GammaRay-2021-2022-Imported created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -22,7 +22,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1635593981867</id>
+			<id>1637358030555</id>
 			<name></name>
 			<type>30</type>
 			<matcher>

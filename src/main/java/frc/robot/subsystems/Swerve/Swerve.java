@@ -70,12 +70,12 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getYaw(), getStates());   
 
         //------ Update PD values -------//
-        double xkP = SpectrumPreferences.getInstance().getNumber("Swerve: X kP", AutoConstants.kPXController)/100;
-        double xkD = SpectrumPreferences.getInstance().getNumber("Swerve: X kD", AutoConstants.kDXController)/100;
-        double ykP = SpectrumPreferences.getInstance().getNumber("Swerve: Y kP", AutoConstants.kPYController)/100;
-        double ykD = SpectrumPreferences.getInstance().getNumber("Swerve: Y kD", AutoConstants.kDYController)/100;
-        double thetakP = SpectrumPreferences.getInstance().getNumber("Swerve: Theta kP", AutoConstants.kPThetaController)/100;
-        double thetakD = SpectrumPreferences.getInstance().getNumber("Swerve: Theta kD", AutoConstants.kDThetaController)/100;        
+        double xkP = SpectrumPreferences.getNumber("Swerve: X kP", AutoConstants.kPXController)/100;
+        double xkD = SpectrumPreferences.getNumber("Swerve: X kD", AutoConstants.kDXController)/100;
+        double ykP = SpectrumPreferences.getNumber("Swerve: Y kP", AutoConstants.kPYController)/100;
+        double ykD = SpectrumPreferences.getNumber("Swerve: Y kD", AutoConstants.kDYController)/100;
+        double thetakP = SpectrumPreferences.getNumber("Swerve: Theta kP", AutoConstants.kPThetaController)/100;
+        double thetakD = SpectrumPreferences.getNumber("Swerve: Theta kD", AutoConstants.kDThetaController)/100;        
         xController.setPID(xkP, 0, xkD);
         yController.setPID(ykP, 0, ykD);
         thetaController.setPID(thetakP, 0, thetakD);
