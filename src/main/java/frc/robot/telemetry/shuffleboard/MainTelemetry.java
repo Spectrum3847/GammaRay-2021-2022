@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 import java.util.Map;
 
+import frc.robot.Robot;
 import frc.robot.telemetry.Log;
 import frc.lib.util.Logger;
 
@@ -50,7 +51,8 @@ public class MainTelemetry {
         matchTimeWidget().withPosition(0, 1);
         flashWidget().withPosition(0, 0);
         m_tab.addNumber("FPGA timestamp", () -> Timer.getFPGATimestamp()).withPosition(0, 4);
-
+        m_tab.addNumber("Climber Position", () -> Robot.climber.motor.getSelectedSensorPosition());
+        m_tab.addNumber("Climber Velocity", () -> Robot.climber.motor.getSelectedSensorVelocity());
     }
 
     // Match Time

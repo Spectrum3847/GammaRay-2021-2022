@@ -8,6 +8,7 @@ import frc.lib.gamepads.XboxGamepad;
 import frc.lib.util.Logger;
 import frc.robot.Robot.RobotState;
 import frc.robot.commands.ResetGyro;
+import frc.robot.commands.climberCommands;
 import frc.robot.commands.ballpath.BallPath;
 import frc.robot.commands.swerve.ClimberSwerve;
 import frc.robot.commands.swerve.LLAim;
@@ -117,6 +118,13 @@ public class Gamepads {
 		// Intiantion line
 		new AndButton(operator.rightTriggerButton, operator.xButton)
 				.whileHeld(BallPath.setRPMs(4500, 1700));
+
+		//Climber Position Test
+		operator.aButton.whileHeld(climberCommands.goToPosition(10000));
+		operator.yButton.whileHeld(climberCommands.goToPosition(90000));
+		new AndButton(operator.rightTriggerButton, operator.aButton)
+			.whileHeld(climberCommands.lowerWithCurrent())
+			.whenReleased(climberCommands.zeroPosition());
 
 		// Hood
 		operator.Dpad.Up.whenPressed(BallPath.setHood(1.0));

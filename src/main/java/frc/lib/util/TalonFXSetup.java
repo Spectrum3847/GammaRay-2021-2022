@@ -29,7 +29,7 @@ public class TalonFXSetup {
     public static void defaultStatusFrames(TalonFX motor){
         //Default Status Rates are listed here: https://docs.ctre-phoenix.com/en/stable/ch18_CommonAPI.html
         int fastTime = 100;
-        int slowTime = 200;
+        int slowTime = 100;
         motor.setStatusFramePeriod(StatusFrame.Status_1_General, 10);
         motor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 20);
         motor.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, fastTime);
