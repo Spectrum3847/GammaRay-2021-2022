@@ -3,6 +3,9 @@ package frc.robot.commands.auto;
 
 import java.util.List;
 
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -14,9 +17,9 @@ import frc.robot.constants.AutoConstants;
 import frc.robot.constants.SwerveConstants;
 
 //Need to work on setting an intial position for the field2D map to work properly.
-public class TestPathFollowing extends SequentialCommandGroup {
+public class TestPathPlanner extends SequentialCommandGroup {
   /** Creates a new TestPathFollowing. */
-  public TestPathFollowing() {
+  public TestPathPlanner() {
     TrajectoryConfig config =
     new TrajectoryConfig(
             AutoConstants.kMaxSpeedMetersPerSecond,
@@ -24,16 +27,7 @@ public class TestPathFollowing extends SequentialCommandGroup {
         .setKinematics(SwerveConstants.swerveKinematics);
 
 // An example trajectory to follow.  All units in meters.
-Trajectory exampleTrajectory =
-    TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, -0.5), new Translation2d(2, -0.5)),
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3.0, -0.5, new Rotation2d(0)),
-        config);
-
+PathPlannerTrajectory exampleTrajectory = PathPlanner.loadPath("New New New Path", 3, 3);
 
     addCommands(
       new SwerveTrajectoryFollow(exampleTrajectory, this::finalRotation)

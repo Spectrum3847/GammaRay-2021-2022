@@ -2,6 +2,9 @@
 package frc.robot.commands.auto;
 
 import java.util.function.Supplier;
+
+import com.pathplanner.lib.PathPlannerTrajectory;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -12,16 +15,16 @@ import frc.robot.subsystems.Swerve.Swerve;
 /** This class is just a wrapper for SwerveControllerCommand to make it easier to call for our swerve drive.
  *  Units in Meters
  */
-public class SwerveTrajectoryFollow extends SwerveControllerCommand {
+public class SwerveTrajectoryFollow extends PathPlannerFollowCommand {
   static Swerve swerve = Robot.swerve;
-  Trajectory m_trajectory;
+  PathPlannerTrajectory m_trajectory;
     
   /** Creates a new SwerveTrajectoryFollow. 
     * @param trajectory The trajectory to follow.
     * @param desiredRotation The angle that the drivetrain should be facing at the end. This is sampled at each
     *     time step.
   */
-  public SwerveTrajectoryFollow(Trajectory trajectory, Supplier<Rotation2d> desiredRotation) {
+  public SwerveTrajectoryFollow(PathPlannerTrajectory trajectory, Supplier<Rotation2d> desiredRotation) {
     super(trajectory, swerve::getPose, SwerveConstants.swerveKinematics, 
         swerve.xController, swerve.yController, swerve.thetaController, desiredRotation, 
         swerve::setModuleStates, swerve);
