@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
     public static final Intake intake = new Intake();
     public static final Indexer indexer = new Indexer();
     public static final Tower tower = new Tower();
-    public static final Launcher launcher = new Launcher();
     public static final Climber climber = new Climber();
+    public static final Launcher launcher = new Launcher();
     public static final VisionLL visionLL = new VisionLL();
     public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
     public static PowerDistribution pdp = new PowerDistribution(0, ModuleType.kCTRE);

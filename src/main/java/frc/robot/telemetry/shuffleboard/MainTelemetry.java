@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.Timer;
 
 import java.util.Map;
 
+
 import frc.robot.telemetry.Log;
+
 import frc.lib.util.Logger;
 
 // The Shuffleboard Main tab.
@@ -49,6 +51,7 @@ public class MainTelemetry {
     public void initialize() {
         matchTimeWidget().withPosition(0, 1);
         flashWidget().withPosition(0, 0);
+
         m_tab.addNumber("FPGA timestamp", () -> Timer.getFPGATimestamp()).withPosition(0, 4);
 
     }
